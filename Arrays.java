@@ -134,8 +134,27 @@ public class Arrays {
         return max;
     } 
 
+    // max subArray sum (kadanes Algo) 
+    public static int maxSubArr3(int arr[]) {
+        int n = arr.length;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+
+        for (int i=0; i<n; i++) {
+            sum += arr[i];
+            if (sum > max) {
+                max = sum;
+            }
+
+            if ( sum < 0) {
+                sum = 0;
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
-        int[] arr = {11, -2, -3, -4, -5};
+        int[] arr = {1, 2, 3, 4, 5};
 
         // System.out.println(binarySearch(arr , 4));
         // System.out.println(lagestEle(arr));
@@ -143,7 +162,8 @@ public class Arrays {
         // reverseArr(arr);
         // pairsArr(arr);
         // subArray(arr);
-        System.out.println(maxSubArr(arr));
-        System.out.println(maxSubArr2(arr));
+        // System.out.println(maxSubArr(arr));
+        // System.out.println(maxSubArr2(arr));
+        System.out.println(maxSubArr3(arr));
     }
 }

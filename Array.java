@@ -1,4 +1,6 @@
-public class Arrays {
+// import java.util.*;
+import java.util.Arrays;
+public class Array {
     // Binary Search
     public static int binarySearch(int arr[] , int key) {
         int start = 0;
@@ -153,8 +155,89 @@ public class Arrays {
         return max;
     }
 
+    // Find the second largest element in an array (no sorting)
+    public static int secondLargest(int arr[]) {
+        if (arr.length < 2) {
+            return -1;  // not enough elements
+        }
+
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > largest) {
+                secondLargest = largest;
+                largest = arr[i];
+            } 
+            else if (arr[i] > secondLargest && arr[i] != largest) {
+                secondLargest = arr[i];
+            }
+        }
+
+        if (secondLargest == Integer.MIN_VALUE) {
+            return -1; // all elements same
+        }
+
+        return secondLargest;
+    }
+
+    // Reverse only the first half of the array
+    public static void reverseHalf(int arr[]) {
+        int half = arr.length / 2;
+        int s = 0;
+        int e = half - 1;
+
+        while(s < e) {
+            int temp = arr[s];
+            arr[s] = arr[e];
+            arr[e] = temp;
+            s++;
+            e--;
+        }
+        printArr(arr);
+    }
+
+    // Find the first element whose frequency is exactly 1
+    public static int eleFreq1(int arr[]) {
+
+        for(int i=0; i<arr.length; i++) {
+            int freq = 0;
+
+            for (int j=0; j<arr.length; j++) {
+                if( arr[j] == arr[i]) {
+                    freq++;
+                }
+            }
+
+            if (freq == 1) {
+                return arr[i];
+            }
+        }
+        return -1;
+    }
+
+    // Find the smallest difference between any two elements in the array
+    public static int smallestDiff(int arr[]) {
+        if (arr.length < 2) {
+            return -1;
+        }
+
+        Arrays.sort(arr);
+
+        int minDiff = Integer.MAX_VALUE;
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            int diff = Math.abs(arr[i] - arr[i + 1]);
+            if (diff < minDiff) {
+                minDiff = diff;
+            }
+        }
+
+        return minDiff;
+    }
+
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = {1, 2, 3, 4, 5, 6};
 
         // System.out.println(binarySearch(arr , 4));
         // System.out.println(lagestEle(arr));
@@ -164,6 +247,10 @@ public class Arrays {
         // subArray(arr);
         // System.out.println(maxSubArr(arr));
         // System.out.println(maxSubArr2(arr));
-        System.out.println(maxSubArr3(arr));
+        // System.out.println(maxSubArr3(arr));
+        // System.out.println(secondLargest(arr));
+        reverseHalf(arr);
+        // System.out.println(eleFreq1(arr));
+        // System.out.println(smallestDiff(arr));
     }
 }

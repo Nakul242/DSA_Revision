@@ -236,6 +236,24 @@ public class Array {
         return minDiff;
     }
 
+    // Best time to buy and sell stock
+    public static int buyAndSell(int arr[]) {
+        int buyPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for(int i=0; i<arr.length; i++) {
+            if (buyPrice < arr[i]) {
+                int profit = arr[i] - buyPrice;
+                maxProfit = Math.max(maxProfit, profit);
+            }
+            else {
+                buyPrice = arr[i];
+            }
+        }
+        return maxProfit;
+    }
+
+    
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6};
 
@@ -249,8 +267,9 @@ public class Array {
         // System.out.println(maxSubArr2(arr));
         // System.out.println(maxSubArr3(arr));
         // System.out.println(secondLargest(arr));
-        reverseHalf(arr);
+        // reverseHalf(arr);
         // System.out.println(eleFreq1(arr));
         // System.out.println(smallestDiff(arr));
+        System.out.println(buyAndSell(arr));
     }
 }

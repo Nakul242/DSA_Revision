@@ -120,7 +120,6 @@ public class BenchmarkTest {
         String remaining = num.substring(0,num.length()-3);
 
         StringBuilder result = new StringBuilder();
-
         int i = remaining.length();
 
         while(i > 2){
@@ -129,13 +128,55 @@ public class BenchmarkTest {
         }
 
         if(i > 0){
-            result.insert(0, remaining.substring(0,i) + delimiter);
+            result.insert(0, remaining.substring(0,i));
         }
 
-        result.append(lastThree);
+        result.append(delimiter).append(lastThree); // ✅ add delimiter before last three
 
         System.out.println(result);
 
+    }
+
+    // Question 6 — Palindrome Check0
+    public static boolean isPalindrome(int arr[] ) {
+        // Approach 1: Using two pointers to compare elements from the start and end of the array
+        int left = 0, right = arr.length - 1;
+
+        while (left < right) {
+            if (arr[left] != arr[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    public static boolean isPalindrome2(int arr[]) {
+        // Approach 2: Using a linked list to store the elements and then comparing elements from the start and end of the list
+        // as asked in the question, we have to use linked list, but we can also use arraylist as well, the logic will be same
+        LinkedList<Integer> list = new LinkedList<>();
+
+        for(int i=0;i<arr.length;i++){
+            list.add(arr[i]);
+        }
+
+        int left = 0;
+        int right = list.size() - 1;
+
+        while(left < right){
+
+            if(!list.get(left).equals(list.get(right))){
+                System.out.println("No");
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        System.out.println("Yes");
+        return true;
     }
 
     public static void main(String[] args) {
@@ -147,7 +188,7 @@ public class BenchmarkTest {
         // blocks(4); // Output: 4
         // blocks2(4); // Output: 4
         // removeEle(arr, 5); // Output: 1 2 3 4 6 7 8 9 10
-        digitalGrouping("abc123def456", '-'); // Output: abc-1-2-3def-4-5-6
+        digitalGrouping("100000", ','); // Output: 100,000
 
     }
 }

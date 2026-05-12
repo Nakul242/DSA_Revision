@@ -166,7 +166,68 @@ class Revision1 {
         return arr1;
     }
 
-    
+    // Merge Sort without using extra space ( in place merging ) => ( Gap Method )
+    // Input: a[] = [2, 4, 7, 10], b[] = [2, 3]
+    // Output: a[] = [2, 2, 3, 4], b[] = [7, 10]
+    // Explanation: After merging the two non-decreasing arrays, we get, [2, 2, 3, 4, 7, 10]
+    public static int nextGap(int gap) {
+        if (gap <= 1) {
+            return 0;
+        }
+        return (gap / 2) + (gap % 2);
+    }
+
+    public static void mergeGap(int arr1[], int n, int arr2[], int m) {
+        int gap = nextGap(n+m);
+
+        while (gap > 0) {
+            int i=0;
+
+            // comparing ele. in first arr
+            while (i+gap < n) {
+                if (arr1[i] > arr1[i+gap]) {
+                    // swap
+                    int temp = arr1[i];
+                    arr1[i] = arr1[i+gap];
+                    arr1[i+gap] = temp;
+                }
+                i++;
+            }
+
+            // comparing ele. in both 
+            int j = gap > n ? gap-n : 0;
+
+            while (i < n  && j < m) {
+                if (arr1[i] > arr2[j]) {
+                    // swap
+                    int temp = arr1[i];
+                    arr1[i] = arr2[j];
+                    arr2[j] = temp;
+                }
+                i++; j++;
+            }
+
+            // comparing ele. in second arr
+            if (j < m) {
+                j = 0;
+
+                while (j+gap < m) {
+                    if (arr2[j] > arr2[j+gap]) {
+                        // swap
+                        int temp = arr2[j];
+                        arr2[j] = arr2[j+gap];
+                        arr2[j+gap] = temp;
+                    }
+                    j++;
+                }
+            }
+
+            gap = nextGap(gap);
+        }
+        printArr(arr1);
+        System.out.println();
+        printArr(arr2);
+    }
 
     // Union of two sorted arrays (GFG) => ( Two Pointer Approach )
     public static ArrayList<Integer> unionOfTwo(int arr1[], int arr2[]) {
@@ -504,13 +565,15 @@ class Revision1 {
         // int sortedArr[] = mergeSort(arr, 0, arr.length - 1);
         // printArr(sortedArr);
 
-        int arr1[] = {1, 2, 4, 5, 6};
-        int arr2[] = {2, 3, 5, 7};
+        // int arr1[] = {1, 2, 4, 5, 6};
+        // int arr2[] = {2, 3, 5, 7};
         // ArrayList<Integer> union = unionOfTwo(arr1, arr2);
         // System.out.println(union);
 
-        int intersection[] = intersectionOfTwo(arr1, arr2);
-        printArr(intersection);
+        // int intersection[] = intersectionOfTwo(arr1, arr2);
+        // printArr(intersection);
+
+        mergeGap(new int[]{1, 4, 7, 8, 10}, 5, new int[]{2, 3, 9}, 3);
         
         // int arr1[] = {1, 5, 10, 20, 40, 80};
         // int arr2[] = {6, 7, 20, 80, 100};

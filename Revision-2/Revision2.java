@@ -160,6 +160,84 @@ public class Revision2 {
         printArr(arr1);
     }
 
+    // union of 2 sorted Arrays
+    public static int[] unionOfArr(int arr1[], int arr2[]) {
+        int n = arr1.length;
+        int m = arr2.length;
+        int i=0, j=0;
+        int val = 0;
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        while (i<n && j<m) {
+            if (arr1[i] == arr2[j]) {
+                val = arr1[i];
+                i++; j++;
+            }
+            else if (arr1[i] < arr2[j]) {
+                val = arr1[i];
+                i++;
+            }
+            else {
+                val = arr2[j];
+                j++;
+            }
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        while (i<n) {
+            val = arr1[i];
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+            i++;
+        }
+
+        while (j<m) {
+            val = arr2[j];
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+            j++;
+        }
+
+        int ans[] = new int[list.size()];
+        int k = 0;
+
+        for (int num : list) {
+            ans[k++] = num;
+        }
+        return ans;
+    }
+
+    // Intersection of Two Arrays
+    public static int[] intersectionOfArr(int arr1[], int arr2[]) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> result = new HashSet<>();
+
+        for (int val : arr1) {
+            set.add(val);
+        }
+
+        for (int val : arr2) {
+            if (set.contains(val)) {
+                result.add(val);
+            }
+        }
+
+        int ans[] = new int[result.size()];
+        int i=0;
+
+        for (int num : result) {
+            ans[i++] = num;
+        }
+
+        return ans;
+    }
+
     // Common in 3 Sorted Array (Using HashSet)
     public static List<Integer> commonIn3SortedArr( List<Integer> arr1, List<Integer> arr2, List<Integer> arr3) {
         HashSet<Integer> set = new HashSet<>();
@@ -283,7 +361,13 @@ public class Revision2 {
         // printArr(result);
 
         // mergeSorted(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3);
-        mergeSorted2(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3);
+        // mergeSorted2(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3);
+
+        // int result[] = unionOfArr(new int[]{1,2,4}, new int[]{1,3,4});
+        // printArr(result);
+
+        int result[] = intersectionOfArr(new int[]{1,2,4}, new int[]{1,3,4});
+        printArr(result);
         
         // List<Integer> result = commonIn3SortedArr2(Arrays.asList(1,2,3,4,5), Arrays.asList(2,3,4,5,6), Arrays.asList(3,4,5,6,7));
         // System.out.println(result);

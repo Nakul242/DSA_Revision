@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 class Revision1 {
     // printArr
@@ -294,6 +292,60 @@ class Revision1 {
         return ans;
     }
 
+    // Intersection of two arrays ( LeetCode 350) => ( Two Pointer Approach )
+    public static int[] intersectionOfTwo2(int arr1[], int arr2[]) {
+        int n = arr1.length;
+        int m = arr2.length;
+        int i = 0, j = 0, k = 0;
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        while (i < n && j < m) {
+            if (arr1[i] == arr2[j]) {
+                list.add(arr1[i]);
+                i++;j++;
+            }
+            else if (arr1[i] < arr2[j]) {
+                i++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        int ans[] = new int[list.size()];
+        for (int val : list) {
+            ans[k++] = val;
+        }
+
+        return ans;
+    }
+
+    // Intersection of two arrays ( LeetCode 350) => ( HashMap Approach )
+    public static int[] intersectionOfTwo3(int arr1[], int arr2[]) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int num : arr1) {
+            map.put(num, map.getOrDefault(num, 0)+1);
+        }
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int num : arr2) {
+            if (map.containsKey(num) && map.get(num) > 0) {
+                list.add(num);
+                map.put(num, map.get(num)-1);
+            }
+        }
+
+        int ans[] = new int[list.size()];
+        int i=0;
+        for (int val : list) {
+            ans[i++] = val;
+        }
+        return ans;
+    }
+
     // Common in 3 Sorted Arrays (GFG ) => ( 3 Pointer Approach  )
     public static void commonInThree(int arr1[], int arr2[], int arr3[]) {
         int p1 = 0, p2 = 0, p3 = 0;
@@ -573,8 +625,15 @@ class Revision1 {
         // int intersection[] = intersectionOfTwo(arr1, arr2);
         // printArr(intersection);
 
-        mergeGap(new int[]{1, 4, 7, 8, 10}, 5, new int[]{2, 3, 9}, 3);
-        
+        // mergeGap(new int[]{1, 4, 7, 8, 10}, 5, new int[]{2, 3, 9}, 3);
+
+        int arr1[] = {1, 2, 4, 5, 6};
+        int arr2[] = {2, 3, 5, 7};
+        // int intersection2[] = intersectionOfTwo2(arr1, arr2);
+        // printArr(intersection2);
+        int intersection3[] = intersectionOfTwo3(arr1, arr2);
+        printArr(intersection3);
+
         // int arr1[] = {1, 5, 10, 20, 40, 80};
         // int arr2[] = {6, 7, 20, 80, 100};
         // int arr3[] = {3, 4, 15, 20, 30, 70, 80, 120};

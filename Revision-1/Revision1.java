@@ -66,6 +66,27 @@ class Revision1 {
         printArr(arr);
     }
 
+    // Shell sort
+    public static void shellSort(int arr[]) {
+        int n = arr.length;
+
+        for (int gap = n/2; gap > 0; gap/=2) {
+            // insertion sort with gap
+            for (int i = gap; i < n; i++) {
+                int curr = arr[i];
+                int prev = i-gap;
+
+                while (prev >= 0  && arr[prev] > curr) {
+                    arr[prev+gap] = arr[prev];
+                    prev-=gap;
+                }
+
+                arr[prev+gap] = curr;
+            }
+        }
+        printArr(arr);
+    }
+
     // Merge Sort
     public static int[] mergeSort(int arr[], int s, int e) {
 
@@ -609,10 +630,11 @@ class Revision1 {
     }
 
     public static void main(String[] args) {
-        // int arr[] = { 2, 8, 6, 4, 10};
+        int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
+        shellSort(arr);
 
         // int sortedArr[] = mergeSort(arr, 0, arr.length - 1);
         // printArr(sortedArr);
@@ -627,12 +649,12 @@ class Revision1 {
 
         // mergeGap(new int[]{1, 4, 7, 8, 10}, 5, new int[]{2, 3, 9}, 3);
 
-        int arr1[] = {1, 2, 4, 5, 6};
-        int arr2[] = {2, 3, 5, 7};
+        // int arr1[] = {1, 2, 4, 5, 6};
+        // int arr2[] = {2, 3, 5, 7};
         // int intersection2[] = intersectionOfTwo2(arr1, arr2);
         // printArr(intersection2);
-        int intersection3[] = intersectionOfTwo3(arr1, arr2);
-        printArr(intersection3);
+        // int intersection3[] = intersectionOfTwo3(arr1, arr2);
+        // printArr(intersection3);
 
         // int arr1[] = {1, 5, 10, 20, 40, 80};
         // int arr2[] = {6, 7, 20, 80, 100};

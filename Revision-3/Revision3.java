@@ -160,6 +160,41 @@ public class Revision3 {
         return temp;
     }
 
+    // Find the difference of two arrays (LeetCode) => ( 2 Pointer Approach )
+    public static List<List<Integer>> differenceOfTwo(int arr1[], int arr2[]) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+
+        for (int num : arr1) {
+            set.add(num);
+        }
+
+        for (int num : arr2) {
+            set2.add(num);
+        }
+
+        List<Integer> list = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        for (int num : set) {
+            if (!set2.contains(num)) {
+                list.add(num);
+            }
+        }
+
+        for (int num : set2) {
+            if (!set.contains(num)) {
+                list2.add(num);
+            }
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(list);
+        ans.add(list2);
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);

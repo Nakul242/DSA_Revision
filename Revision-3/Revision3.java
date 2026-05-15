@@ -8,18 +8,19 @@ public class Revision3 {
 
     public static void bubbleSort(int arr[]) {
         int n = arr.length;
+
         for (int i = 0; i < n-1; i++) {
-            boolean isSwapped = false;
+            boolean isSwapped = true;
             for (int j = 0; j < n-1-i; j++) {
                 if (arr[j] > arr[j+1]) {
                     // swap
                     int temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
-                    isSwapped = true;
+                    isSwapped = false;
                 }
             }
-            if (!isSwapped) {
+            if (isSwapped) {
                 break;
             }
         }
@@ -28,11 +29,12 @@ public class Revision3 {
 
     public static void selectionSort(int arr[]) {
         int n = arr.length;
-        for (int i = 0; i < n-1; i++) {
+
+        for (int i = 0; i < n; i++) {
             int min = i;
             for (int j = i+1; j < n; j++) {
                 if (arr[min] > arr[j]) {
-                    min = j;
+                    min = j;        
                 }
             }
             // swap only when needed
@@ -50,39 +52,58 @@ public class Revision3 {
 
         for (int i = 1; i < n; i++) {
             int curr = arr[i];
-            int prev = i-1;
+            int prev = i - 1;
 
             while (prev >= 0 && arr[prev] > curr) {
                 arr[prev+1] = arr[prev];
                 prev--;
             }
 
-            // insertion of curr ele
+            // fix curr position
             arr[prev+1] = curr;
         }
         printArr(arr);
     }
 
-    public static int[] mergeSort(int arr[], int s, int e) {
-        if (s > e) {
-            return new int[0];
-        }
+    public static void shellSort(int arr[]) {
+        int n = arr.length;
+        for (int gap = n/2; gap > 0; gap/=2) {
+            // insertion sort with the gap
+            for (int i = gap; i < n; i++) {
+                int curr = arr[i];
+                int prev = i-gap;
 
+                while (prev >= 0 && arr[prev] > curr) {
+                    arr[prev+gap] = arr[prev];
+                    prev-=gap;
+                }
+
+                //fix curr pos
+                arr[prev+gap] = curr;
+            }
+        }
+        printArr(arr);
+    }
+
+    public static int[] mergeSort(int arr[], int s, int e) {
         if (s == e) {
             return new int[]{arr[s]};
         }
 
-        int mid = s + (e-s)/2;
+        if (s > e) {
+            return new int[0];
+        }
 
+        int mid = s + ( e - s) /2;
         int a1[] = mergeSort(arr, s, mid);
         int a2[] = mergeSort(arr, mid+1, e);
+
         return merge(a1, a2);
     }
 
-    public static int[] merge(int a1[] , int a2[]) {
+    public static int[] merge(int a1[], int a2[]) {
         int n1 = a1.length;
         int n2 = a2.length;
-
         int p1 = 0, p2 = 0, k = 0;
         int temp[] = new int[n1+n2];
 
@@ -200,6 +221,7 @@ public class Revision3 {
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
+        // shellSort(arr);
 
         int sortedArr[] = mergeSort(arr, 0, arr.length-1);
         printArr(sortedArr);

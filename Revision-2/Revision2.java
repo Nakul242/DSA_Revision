@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -213,7 +214,7 @@ public class Revision2 {
         return ans;
     }
 
-    // Intersection of Two Arrays
+    // Intersection of Two Arrays | ( leetcode 349)
     public static int[] intersectionOfArr(int arr1[], int arr2[]) {
         HashSet<Integer> set = new HashSet<>();
         HashSet<Integer> result = new HashSet<>();
@@ -232,6 +233,34 @@ public class Revision2 {
         int i=0;
 
         for (int num : result) {
+            ans[i++] = num;
+        }
+
+        return ans;
+    }
+
+    // Intersection of two Arrays || ( leetcode 350) 
+    public static int[] intersectionOfArr2(int arr1[], int arr2[]) {
+        // using HashMap
+        HashMap<Integer,Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int num : arr1) {
+            map.put(num, map.getOrDefault(num, 0)+1);
+        }
+
+        for (int num : arr2) {
+            if (map.containsKey(num) && map.get(num) > 0) {
+                list.add(num);
+                map.put(num, map.get(num)-1); // decreasing freq count
+            }
+        }
+
+        // contvert to arr
+        int ans[] = new int[list.size()];
+        int i=0;
+
+        for (int num : list) {
             ans[i++] = num;
         }
 

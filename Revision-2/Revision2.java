@@ -380,8 +380,41 @@ public class Revision2 {
         return nums;
     }
 
+    // QuickSort
+    public static void quickSort(int arr[], int s, int e) {
+        if (s >= e ) {
+            return;
+        }
+
+        int pivot = partition(arr, s, e);
+        quickSort(arr, s, pivot-1);
+        quickSort(arr, pivot+1, e);
+    }
+
+    public static int partition(int arr[], int s, int e) {
+        int pivot = arr[e];
+        int i = s-1;
+
+        for (int j = s; j < e; j++) {
+            if (pivot > arr[j]) {
+                // swap
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        // to fix pivot pos
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[e];
+        arr[e] = temp;
+
+        return i;
+    }
+
     public static void main(String[] args) {
-        // int arr[] = { 2, 5, 4, 7, 6};
+        int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
@@ -395,8 +428,8 @@ public class Revision2 {
         // int result[] = unionOfArr(new int[]{1,2,4}, new int[]{1,3,4});
         // printArr(result);
 
-        int result[] = intersectionOfArr(new int[]{1,2,4}, new int[]{1,3,4});
-        printArr(result);
+        // int result[] = intersectionOfArr(new int[]{1,2,4}, new int[]{1,3,4});
+        // printArr(result);
         
         // List<Integer> result = commonIn3SortedArr2(Arrays.asList(1,2,3,4,5), Arrays.asList(2,3,4,5,6), Arrays.asList(3,4,5,6,7));
         // System.out.println(result);
@@ -407,5 +440,7 @@ public class Revision2 {
         // int result[] = sortedSquares(new int[]{-4,-1,0,3,10});
         // printArr(result);
 
+        quickSort(arr, 0, arr.length-1);
+        printArr(arr);
     }
 }  

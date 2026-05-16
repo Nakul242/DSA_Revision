@@ -234,7 +234,7 @@ public class Revision3 {
                     j++;
                 }
             }
-            
+
             gap = nextGap(gap);
         }
 
@@ -279,7 +279,7 @@ public class Revision3 {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 2, 8, 4, 10, 6, 8};
+        // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);

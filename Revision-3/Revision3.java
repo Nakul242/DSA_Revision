@@ -181,6 +181,68 @@ public class Revision3 {
         return temp;
     }
 
+    // Merge without Extra Space ( GFG ) => Gap Method
+    public static int nextGap(int gap) {
+        if (gap <= 1) {
+            return 0;
+        }
+        return gap/2 + gap%2;
+    }
+
+    public static void mergeGap(int arr1[], int arr2[]) {
+        int n = arr1.length;
+        int m = arr2.length;
+        int gap = nextGap(n+m);
+
+        while (gap > 0) {
+            int i = 0;
+
+            // compare in first array
+            while (i+gap < n) {
+                if (arr1[i] > arr1[i+gap]) {
+                    // swap
+                    int temp = arr1[i];
+                    arr1[i] = arr1[i+gap];
+                    arr1[i+gap] = temp;
+                }
+                i++;
+            }
+
+            // compare in both arr
+            int j = 0;
+            while (i<n && i<m) {
+                if (arr1[i] > arr2[j]) {
+                    // swap
+                    int temp = arr1[i];
+                    arr1[i] = arr2[j];
+                    arr2[j] = temp;
+                }
+                i++; j++;
+            }
+
+            // compare in second arr
+            if (j<m) {
+                j = 0;
+
+                while (j+gap < m) {
+                    if (arr2[j] > arr2[j+gap]) {
+                        // swap
+                        int temp = arr2[j];
+                        arr2[j] = arr2[j+gap];
+                        arr2[j+gap] = temp;
+                    }
+                    j++;
+                }
+            }
+            
+            gap = nextGap(gap);
+        }
+
+        printArr(arr1);
+        System.out.println();
+        printArr(arr2);
+    }
+
     // Find the difference of two arrays (LeetCode) => ( 2 Pointer Approach )
     public static List<List<Integer>> differenceOfTwo(int arr1[], int arr2[]) {
         HashSet<Integer> set = new HashSet<>();
@@ -223,8 +285,8 @@ public class Revision3 {
         // insertionSort(arr);
         // shellSort(arr);
 
-        int sortedArr[] = mergeSort(arr, 0, arr.length-1);
-        printArr(sortedArr);
+        // int sortedArr[] = mergeSort(arr, 0, arr.length-1);
+        // printArr(sortedArr);
 
         // int arr1[] = {1, 2, 3, 0, 0, 0};
         // int arr2[] = {2, 5, 6};
@@ -233,5 +295,7 @@ public class Revision3 {
         // // int mergedArr[] = mergeSorted(arr1, n, arr2, m);
         // int mergedArr[] = mergeSorted2(arr1, n, arr2, m);
         // printArr(mergedArr);
+
+        mergeGap(new int[]{1, 4, 7, 8, 10}, new int[]{2, 3, 9});
     }
 }

@@ -243,6 +243,77 @@ public class Revision3 {
         printArr(arr2);
     }
 
+    // Union of two Sorted Array ( GFG ) => ( 2 Pointer Approach ) 
+    public static ArrayList<Integer> unionOfTwo(int a[], int b[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int val = 0;
+        int i = 0;
+        int j = 0;
+
+        while (i < a.length  && j < b.length) {
+            if (a[i] == b[j]) {
+                val = a[i];
+                i++; j++;
+            }
+            else if (a[i] < b[j]) {
+                val = a[i];
+                i++;
+            }
+            else {
+                val = b[j];
+                j++;
+            }
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        while (i < a.length) {
+            val = a[i++];
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        while (j < b.length) {
+            val = b[j++];
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        return list;
+    }
+
+    // Intersection of two Arrays ( LeetCode 349 ) => ( HashSet Approach )
+    public static int[] intersectionOfTwo(int arr1[], int arr2[]) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> ans = new HashSet<>();
+
+        for (int num : arr1) {
+            set.add(num);
+        }
+
+        for (int num : arr2) {
+            if (set.contains(num)) {
+                ans.add(num);
+            }
+        }
+
+        // convert to array
+        int result[] = new int[ans.size()];
+        int i=0;
+
+        for (int val : ans) {
+            result[i++] = val;
+        }
+
+        return result;
+    }
+
     // Find the difference of two arrays (LeetCode) => ( 2 Pointer Approach )
     public static List<List<Integer>> differenceOfTwo(int arr1[], int arr2[]) {
         HashSet<Integer> set = new HashSet<>();
@@ -296,6 +367,14 @@ public class Revision3 {
         // int mergedArr[] = mergeSorted2(arr1, n, arr2, m);
         // printArr(mergedArr);
 
-        mergeGap(new int[]{1, 4, 7, 8, 10}, new int[]{2, 3, 9});
+        // mergeGap(new int[]{1, 4, 7, 8, 10}, new int[]{2, 3, 9});
+
+        // int a[] = {1, 2, 4, 5, 6};
+        // int b[] = {2, 3, 5, 7};
+        // System.out.println(unionOfTwo(a, b));
+
+        int arr1[] = {1, 2, 2, 1};
+        int arr2[] = {2, 2};
+        System.out.println(Arrays.toString(intersectionOfTwo(arr1, arr2)));
     }
 }

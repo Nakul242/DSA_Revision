@@ -629,12 +629,134 @@ class Revision1 {
         return nums;
     }
 
+    // Move Zeroes ( LeetCode 283 ) => ( Overwrite approach )
+    public static void moveZeroes(int arr[]) {
+        int pos = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                arr[pos++] = arr[i];
+            }
+        }
+
+        while (pos < arr.length) {
+            arr[pos++] = 0;
+        }
+
+        printArr(arr);
+    }
+
+    // Move Zeroes ( LeetCode 283 ) => ( Swap approach )
+    public static void moveZeroes2(int arr[]) {
+        int pos = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                // swap
+                int temp = arr[pos];
+                arr[pos] = arr[i];
+                arr[i] = temp;
+                pos++;
+            }
+        }
+
+        printArr(arr);
+    }
+
+    // Sort Array by Parity ( LeetCode 905 ) => ( partition approach )
+    public static void sortArrayByParity(int arr[]) {
+        int i = -1;
+
+        for (int j = 0; j < arr.length; j++) {
+            if (arr[j] % 2 == 0) {
+                // swap
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        printArr(arr);
+    }
+
+    // Move all negative numbers to end (GFG) => ( Single Array Approach )
+    public static void moveNegative(int arr[]) {
+        int ans[] = new int[arr.length];
+        int k = 0;
+
+        for (int num : arr) {
+            if (num >= 0) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int num : arr) {
+            if (num < 0) {
+                ans[k++] = num;
+            }
+        }
+
+        printArr(ans);
+    }
+
+    // Sort Array by Parity II ( LeetCode 922 ) => ( Single Array Approach )
+    public static void sortArrayByParityII(int arr[]) {
+        int ans[] = new int[arr.length];
+        int k = 0;
+
+        for (int num : arr) {
+            if (num % 2 == 0) {
+                ans[k] = num;
+                k+=2;
+            }
+        }
+
+        k = 1;
+        for (int num : arr) {
+            if (num % 2 != 0) {
+                ans[k] = num;
+                k+=2;
+            }
+        }
+
+        printArr(ans);
+    }
+
+    // Sort Array by Parity II ( LeetCode 922 ) => ( Two Pointer Approach )
+    public static void sortArrayByParityII2(int arr[]) {
+        int n = arr.length;
+        int even = 0, odd = 1;
+
+        while (even < n && odd < n) {
+
+            // if even index has even number, move forward
+            if (arr[even] % 2 == 0) {
+                even+=2;
+            } 
+            
+            // if odd index has odd number, move forward
+            else if (arr[odd] % 2 != 0) {
+                odd+=2;
+            } 
+            
+            // if both wrong, swap
+            else {
+                int temp = arr[even];
+                arr[even] = arr[odd];
+                arr[odd] = temp;
+
+                even+=2; odd+=2;
+            }
+        }
+        printArr(arr);
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
-        shellSort(arr);
+        // shellSort(arr);
 
         // int sortedArr[] = mergeSort(arr, 0, arr.length - 1);
         // printArr(sortedArr);
@@ -683,5 +805,15 @@ class Revision1 {
         // threeWayPartition(new int[]{1, 2, 3, 3, 4, 5, 5, 6}, 3, 5);
         // int result[] = pivotArray(new int[]{9, 12, 5, 10, 14, 3, 10}, 10);
         // printArr(result);
+
+        // moveZeroes(new int[]{0,1,0,3,12});
+        // moveZeroes2(new int[]{0,1,0,3,12});
+
+        // sortArrayByParity(new int[]{3,1,2,4});
+
+        // moveNegative(new int[]{-1, 2, -3, 4, -5});
+
+        // sortArrayByParityII(new int[]{4, 2, 5, 7});
+        sortArrayByParityII2(new int[]{4, 2, 5, 7});
     }
 }

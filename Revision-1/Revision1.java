@@ -1,3 +1,4 @@
+import java.security.PublicKey;
 import java.util.*;
 
 class Revision1 {
@@ -791,6 +792,24 @@ class Revision1 {
         printArr(ans);
     }
 
+    // ********************************************  RECURSION  *******************************************
+    // ****************************************************************************************************
+    public static void printIncAndDec(int n, int i) {
+        if ( i > n) return;
+        System.out.print(i+" ");
+        printIncAndDec(n, i+1);
+        if ( i != 5) System.out.print(i+" ");
+    }
+
+    // Tower of Hanoi
+    public static void towerOfHanoi(int n, char src, char helper, char dest) {
+        if (n == 0) return;
+
+        towerOfHanoi(n-1, src, dest, helper);
+        System.out.println("Move "+n+" from "+src+" to "+dest);
+        towerOfHanoi(n-1, helper, src, dest);
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
@@ -857,6 +876,10 @@ class Revision1 {
         // sortArrayByParityII2(new int[]{4, 2, 5, 7});
 
         // rearrangeBySign(new int[]{3, 1, -2, -4});
-        rearrangeBySign2(new int[]{3, 1, -2, -4});
+        // rearrangeBySign2(new int[]{3, 1, -2, -4});
+
+        // printIncAndDec(5,1);
+
+        towerOfHanoi(3, 'A', 'B', 'C');
     }
 }

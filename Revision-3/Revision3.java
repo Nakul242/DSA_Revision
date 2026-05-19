@@ -314,6 +314,88 @@ public class Revision3 {
         return result;
     }
 
+    // Intersection of two Arrays ( LeetCode 350 ) => ( HashMap Approach )
+    public static int[] intersectionOfTwo2(int arr1[], int arr2[]) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int num : arr1) {
+            map.put(num, map.getOrDefault(num, 0)+1);
+        }
+
+        for (int num : arr2) {
+            if (map.containsKey(num) && map.get(num) > 0) {
+                list.add(num);
+                map.put(num, map.get(num)-1);
+            }
+        }
+
+        // convert to array
+        int result[] = new int[list.size()];
+        int i=0;
+
+        for (int val : list) {
+            result[i++] = val;
+        }
+
+        return result;
+    }
+
+    // Intersection of two Arrays ( LeetCode 350 ) => ( Sorting + Two Pointer Approach )
+    public static int[] intersectionOfTwo3(int arr1[], int arr2[]) {
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        ArrayList<Integer> list = new ArrayList<>();
+        int i=0 , j=0;
+
+        while (i < arr1.length  && j < arr2.length) {
+            if (arr1[i] == arr2[j]) {
+                list.add(arr1[i]);
+                i++; j++;
+            }
+            else if (arr1[i] < arr2[j]) {
+                i++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        // convert
+        int ans[] = new int[list.size()];
+        int k=0;
+
+        for (int val : list) {
+            ans[k++] = val;
+        }
+
+        return ans;
+    }
+
+    // Common Elements in three sorted arrays ( GFG ) => ( 3 Pointer Approach )
+    public static ArrayList<Integer> commonElements(int a[], int b[], int c[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i=0, j=0, k=0;
+
+        while (i < a.length  && j < b.length  && k < c.length) {
+            if (a[i] == b[j] && b[j] == c[k]) {
+                if (list.isEmpty() || list.get(list.size()-1) != a[i]) {
+                    list.add(a[i]);
+                }
+                i++; j++; k++;
+            }
+            else {
+                int min = Math.min(a[i], Math.min(b[j], c[k]));
+
+                if ( a[i] == min ) i++;
+                if ( b[j] == min ) j++;
+                if ( c[k] == min ) k++;
+            }
+        }
+        return list;
+    }
+        
     // Find the difference of two arrays (LeetCode) => ( 2 Pointer Approach )
     public static List<List<Integer>> differenceOfTwo(int arr1[], int arr2[]) {
         HashSet<Integer> set = new HashSet<>();
@@ -373,8 +455,16 @@ public class Revision3 {
         // int b[] = {2, 3, 5, 7};
         // System.out.println(unionOfTwo(a, b));
 
-        int arr1[] = {1, 2, 2, 1};
-        int arr2[] = {2, 2};
-        System.out.println(Arrays.toString(intersectionOfTwo(arr1, arr2)));
+        // int arr1[] = {1, 2, 2, 1};
+        // int arr2[] = {2, 2};
+        // System.out.println(Arrays.toString(intersectionOfTwo(arr1, arr2)));
+        // System.out.println(Arrays.toString(intersectionOfTwo2(arr1, arr2)));
+        // System.out.println(Arrays.toString(intersectionOfTwo3(arr1, arr2)));
+
+        System.out.println(commonElements(new int[]{1, 5, 10, 20, 80}, new int[]{ 10, 20, 80}, new int[]{5, 10, 20, 80}));
+
+        //  int arr3[] = {1, 2, 3};
+        //  int arr4[] = {2, 4, 6};
+        //  System.out.println(differenceOfTwo(arr3, arr4));
     }
 }

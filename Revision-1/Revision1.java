@@ -751,6 +751,46 @@ class Revision1 {
         printArr(arr);
     }
 
+    // Rearrange Array Elements by Sign (LeetCode 2149) => ( Two Pointer Approach )
+    public static void rearrangeBySign(int arr[]) {
+        int n = arr.length;
+        int pos = 0, neg = 1;
+
+        while (pos < n && neg < n) {
+            if (arr[pos] >= 0) {
+                pos+=2;
+            } else if (arr[neg] < 0) {
+                neg+=2;
+            } else {
+                // swap
+                int temp = arr[pos];
+                arr[pos] = arr[neg];
+                arr[neg] = temp;
+
+                pos+=2; neg+=2;
+            }
+        }
+        printArr(arr);
+    }
+
+    // Rearrange Array Elements by Sign (LeetCode 2149) => ( Single Array Approach )
+    public static void rearrangeBySign2(int arr[]) {
+        int n = arr.length;
+        int ans[] = new int[n];
+        int pos = 0, neg = 1;
+
+        for (int num : arr) {
+            if (num >= 0) {
+                ans[pos] = num;
+                pos+=2;
+            } else {
+                ans[neg] = num;
+                neg+=2;
+            }
+        }
+        printArr(ans);
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
@@ -814,6 +854,9 @@ class Revision1 {
         // moveNegative(new int[]{-1, 2, -3, 4, -5});
 
         // sortArrayByParityII(new int[]{4, 2, 5, 7});
-        sortArrayByParityII2(new int[]{4, 2, 5, 7});
+        // sortArrayByParityII2(new int[]{4, 2, 5, 7});
+
+        // rearrangeBySign(new int[]{3, 1, -2, -4});
+        rearrangeBySign2(new int[]{3, 1, -2, -4});
     }
 }

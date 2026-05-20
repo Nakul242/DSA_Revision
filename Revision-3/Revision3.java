@@ -431,6 +431,106 @@ public class Revision3 {
         return ans;
     }
 
+    // Find the difference of two arrays (LeetCode) => ( brute force approach )
+    public static List<List<Integer>> differenceOfTwoBruteForce(int arr1[], int arr2[]) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        for (int num : arr1) {
+            boolean found = false;
+            for (int n : arr2) {
+                if (n == num) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                if (!list1.contains(num)) {
+                    list1.add(num);
+                }
+            }
+        }
+
+        for (int num : arr2) {
+            boolean found = false;
+            for (int n : arr1) {
+                if (n == num) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                if (!list2.contains(num)) {
+                    list2.add(num);
+                }
+            }
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(list1);
+        ans.add(list2);
+
+        return ans;
+    }
+
+    // Square of a Sorted Array ( LeetCode 977 ) => ( Two Pointer Approach )
+    public static int[] squareOfSortedArray(int[] nums) {
+        int n = nums.length;
+        int ans[] = new int[n];
+        int k = n-1;
+
+        int i=0, j=n-1;
+        while (i < j) {
+            int a = nums[i] * nums[i];
+            int b = nums[j] * nums[j];
+
+            if (a > b) {
+                ans[k--] = a;
+                i++;
+            }
+            else {
+                ans[k--] = b;
+                j--;
+            }
+        }
+
+        return ans;
+    }
+
+    // Quick Sort 
+    public static void quickSort(int[] arr, int s, int e) {
+        if ( s > e ) {
+            return;
+        }
+
+        int pivot = partition(arr, s , e);
+        quickSort(arr, s, pivot-1);
+        quickSort(arr, pivot+1, e);
+    }
+
+    public static int partition(int arr[], int s, int e) {
+        int pivot = arr[e];
+        int i = s-1;
+
+        for (int j = s; j < e; j++) {
+            if (arr[j] < pivot) {
+                // swap
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // fix pivot pos
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[e];
+        arr[e] = temp;
+
+        return i;
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -461,10 +561,18 @@ public class Revision3 {
         // System.out.println(Arrays.toString(intersectionOfTwo2(arr1, arr2)));
         // System.out.println(Arrays.toString(intersectionOfTwo3(arr1, arr2)));
 
-        System.out.println(commonElements(new int[]{1, 5, 10, 20, 80}, new int[]{ 10, 20, 80}, new int[]{5, 10, 20, 80}));
+        // System.out.println(commonElements(new int[]{1, 5, 10, 20, 80}, new int[]{ 10, 20, 80}, new int[]{5, 10, 20, 80}));
 
-        //  int arr3[] = {1, 2, 3};
+        //  int arr3[] = {1, 2, 3, 3};
         //  int arr4[] = {2, 4, 6};
         //  System.out.println(differenceOfTwo(arr3, arr4));
+        //  System.out.println(differenceOfTwoBruteForce(arr3, arr4));
+
+        // int arr5[] = {-4, -1, 0, 3, 10};
+        // System.out.println(Arrays.toString(squareOfSortedArray(arr5)));
+
+        int arr6[] = {10, 7, 8, 9, 1, 5};
+        quickSort(arr6, 0, 5);
+        printArr(arr6);
     }
 }

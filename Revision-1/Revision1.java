@@ -831,6 +831,47 @@ class Revision1 {
         towerOfHanoi(n-1, helper, src, dest);
     }
 
+    // Largest element in array
+    public static int largest(int arr[], int i) {
+        if (i == arr.length-1) return arr[i];
+        return Math.max(arr[i], largest(arr, i+1));
+    }
+
+    public static int largest2(int arr[], int i, int max) {
+        if (i == arr.length) return max;
+        if (arr[i] > max) max = arr[i];
+        return largest2(arr, i+1, max);
+    }
+
+    // First and Last Occurrence of an element in array (GFG)
+    public static void firstAndLastOccurrence(int arr[], int i, int key, int ans[]) {
+        if (i == arr.length) {
+            return;
+        }
+
+        if (arr[i] == key) {
+            if (ans[0] == -1) {
+                ans[0] = i;
+            }
+            ans[1] = i;
+        }
+
+        firstAndLastOccurrence(arr, i+1, key, ans);
+    }
+
+    // Power of a number (leetCode 50) => ( Fast Exponentiation )
+    public static int power(int x, int n) {
+        if (n == 0) return 1;
+        int temp = power(x, n/2);
+        temp = temp * temp;
+
+        if (n % 2 == 0) {
+            return temp;
+        } else {
+            return x * temp;
+        }
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
@@ -903,6 +944,15 @@ class Revision1 {
         // System.out.println(fibonacci(6));
         // printIncAndDec(5,1);
         // System.out.println(isSorted(new int[]{1, 2, 3, 4, 5}, 0));
-        towerOfHanoi(3, 'A', 'B', 'C');
+        // towerOfHanoi(3, 'A', 'B', 'C');
+        // System.out.println(largest(new int[]{1, 2, 13, 4, 5}, 0));
+        // System.out.println(largest2(new int[]{1, 2, 13, 4, 5}, 0, Integer.MIN_VALUE));
+        
+        // int ans[] = {-1, -1};
+        // firstAndLastOccurrence(new int[]{1, 2, 3, 2, 4}, 0, 2, ans);
+        // System.out.println("First Occurrence = " + ans[0]);
+        // System.out.println("Last Occurrence = " + ans[1]);
+
+        System.out.println("Power of 2^5 = " + power(2, 5));
     }
 }

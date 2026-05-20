@@ -594,6 +594,82 @@ public class Revision2 {
         printArr(arr);
     }
 
+    // Move all negative elements to end of array ( GFG ) => ( Single array approach )
+    public static void moveNegativesToEnd(int arr[]) {
+        int temp[] = new int[arr.length];
+        int k = 0;
+
+        for (int num : arr) {
+            if (num >= 0) {
+                temp[k++] = num;
+            }
+        }
+
+        for (int num : arr) {
+            if (num < 0) {
+                temp[k++] = num;
+            }
+        }
+
+        // copy to array
+        for (int i = 0; i < temp.length; i++) {
+            arr[i] = temp[i];
+        }
+
+        printArr(arr);
+    }
+
+    // Sort Array by Parity II ( LeetCode 922 ) => ( Two Pointer approach )
+    public static void sortArrayByParityII(int arr[]) {
+        // in place approach
+        int n = arr.length;
+        int even = 0; // for even index
+        int odd = 1; // for odd index
+
+        while (even < n && odd < n) {
+            if (arr[even] % 2 == 0) {
+                even += 2;
+            }
+            else if (arr[odd] % 2 == 1) {
+                odd += 2;
+            }
+            else {
+                // swap
+                int temp = arr[even];
+                arr[even] = arr[odd];
+                arr[odd] = temp;
+                even += 2;
+                odd += 2;
+            }
+        }
+        printArr(arr);
+    }
+
+    // Sort Array by Parity II ( LeetCode 922 ) => ( Single array approach )
+    public static void sortArrayByParityII2(int arr[]) {
+        int n = arr.length;
+        int temp[] = new int[n];
+        int even = 0; // for even index
+        int odd = 1; // for odd index
+
+        for (int num : arr) {
+            if (num % 2 == 0) {
+                temp[even] = num;
+                even += 2;
+            }
+            else {
+                temp[odd] = num;
+                odd += 2;
+            }
+        }
+
+        // copy to original array
+        for (int i = 0; i < n; i++) {
+            arr[i] = temp[i];
+        }
+        printArr(arr);
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -637,6 +713,12 @@ public class Revision2 {
         // moveZeroes(new int[]{0,1,0,3,12});
         // moveZeroes2(new int[]{0,1,0,3,12});
 
-        sortArrayByParity(new int[]{3,1,2,4});
+        // sortArrayByParity(new int[]{3,1,2,4});
+
+        // moveNegativesToEnd(new int[]{1, -1, 3, 2, -7, -5});
+
+        // sortArrayByParityII(new int[]{4,2,5,7});
+        sortArrayByParityII2(new int[]{4,2,5,7});
+
     }
 }  

@@ -794,11 +794,32 @@ class Revision1 {
 
     // ********************************************  RECURSION  *******************************************
     // ****************************************************************************************************
+
+    // Factorial
+    public static int factorial(int n) {
+        if (n == 0) return 1;
+        return n * factorial(n-1);
+    }
+
+    // Fibonacci
+    public static int fibonacci(int n) {
+        if (n <= 1) return n;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    // Print increasing and decreasing (GFG)
     public static void printIncAndDec(int n, int i) {
         if ( i > n) return;
         System.out.print(i+" ");
         printIncAndDec(n, i+1);
         if ( i != 5) System.out.print(i+" ");
+    }
+
+    // Check if array is sorted (GFG)
+    public static boolean isSorted(int arr[], int i) {
+        if (i == arr.length-1) return true;
+        if (arr[i] > arr[i+1]) return false;
+        return isSorted(arr, i+1);
     }
 
     // Tower of Hanoi
@@ -878,8 +899,10 @@ class Revision1 {
         // rearrangeBySign(new int[]{3, 1, -2, -4});
         // rearrangeBySign2(new int[]{3, 1, -2, -4});
 
+        // System.out.println(factorial(5));
+        // System.out.println(fibonacci(6));
         // printIncAndDec(5,1);
-
+        // System.out.println(isSorted(new int[]{1, 2, 3, 4, 5}, 0));
         towerOfHanoi(3, 'A', 'B', 'C');
     }
 }

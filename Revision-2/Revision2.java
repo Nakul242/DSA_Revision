@@ -670,6 +670,31 @@ public class Revision2 {
         printArr(arr);
     }
 
+    // Rearrange the array ele by sign ( leetCode 2149 ) => ( Two Pointer approach )
+    public static void rearrangeBySign(int arr[]) {
+        int n = arr.length;
+        int temp[] = new int[n];
+        int pos = 0; // for positive index
+        int neg = 1; // for negative index
+
+        for (int num : arr) {
+            if (num >= 0) {
+                temp[pos] = num;
+                pos += 2;
+            }
+            else {
+                temp[neg] = num;
+                neg += 2;
+            }
+        }
+
+        // copy to original array
+        for (int i = 0; i < n; i++) {
+            arr[i] = temp[i];
+        }
+        printArr(arr);
+    }
+
     public static void main(String[] args) {
         int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -718,7 +743,8 @@ public class Revision2 {
         // moveNegativesToEnd(new int[]{1, -1, 3, 2, -7, -5});
 
         // sortArrayByParityII(new int[]{4,2,5,7});
-        sortArrayByParityII2(new int[]{4,2,5,7});
+        // sortArrayByParityII2(new int[]{4,2,5,7});
 
+        rearrangeBySign(new int[]{1, -1, 3, -2, 4, -3});
     }
 }  

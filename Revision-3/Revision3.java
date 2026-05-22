@@ -531,6 +531,179 @@ public class Revision3 {
         return i;
     }
 
+    // Binary Array Sorting ( GFG ) => ( partition approach )
+    public static void binaryArraySorting(int arr[]) {
+        int n = arr.length;
+        int i = -1;
+
+        for (int j = 0; j < n; j++) {
+            if (arr[j] < 1) {
+                // swap
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        printArr(arr);
+    }
+
+    // Sort Colors ( LeetCode 75 ) => ( Dutch National Flag Algorithm )
+     public static void sortColors(int[] nums) {
+        int low = 0, mid = 0, high = nums.length-1;
+
+        while (mid <= high) {
+            if (nums[mid] == 0) {
+                // swap
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+                low++; mid++;
+            }
+            else if (nums[mid] == 1) {
+                mid++;
+            }
+            else {
+                // swap
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                high--;
+            }
+        }
+        printArr(nums);
+    }
+
+    // Sort Colors ( LeetCode 75 ) => ( Partition approach )
+    public static void sortColors2(int[] nums) {
+        int n = nums.length;
+        int i = -1;
+
+        for (int j = 0; j < n; j++) {
+            if (nums[j] == 0) {
+                // swap
+                i++;
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            }
+        }
+
+        for (int k = i+1; k < n; k++) {
+            if (nums[k] == 1) {
+                // swap
+                i++;
+                int temp = nums[i];
+                nums[i] = nums[k];
+                nums[k] = temp;
+            }
+        }
+        printArr(nums);
+    }
+
+    // Three way partitioning ( Dutch National Flag Algorithm ) => ( GFG )
+    public static void threeWayPartitioning(int[] nums, int a, int b) {
+        int low = 0, mid = 0, high = nums.length-1;
+
+        while (mid <= high) {
+            if (nums[mid] < a) {
+                // swap
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+                low++; mid++;
+            }
+            else if (nums[mid] >= a && nums[mid] <= b) {
+                mid++;
+            }
+            else {
+                // swap
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                high--;
+            }
+        }
+        printArr(nums);
+    }
+
+    // Partintion array according to given pivot (order preserving)=> ( leetcode 2161 ) => ( Single Array approach )
+    public static int[] partitionArray(int[] nums, int pivot) {
+        int ans[] = new int[nums.length];
+        int k = 0;
+
+        for (int num : nums) {
+            if (num < pivot) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int num : nums) {
+            if (num == pivot) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int num : nums) {
+            if (num > pivot) {
+                ans[k++] = num;
+            }
+        }
+
+        return ans;
+    }
+
+    // Move Zeros to end ( LeetCode 283 ) => ( Two Pointer Approach )
+    public static void moveZerosToEnd(int[] nums) {
+        int n = nums.length;
+        int i = -1;
+
+        for (int j = 0; j < n; j++) {
+            if (nums[j] != 0) {
+                // swap
+                i++;
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            }
+        }
+        printArr(nums);
+    }
+
+    // Move Zeros to end ( LeetCode 283 ) => ( Overwrite Approach )
+    public static void moveZerosToEnd2(int[] nums) {
+        int n = nums.length;
+        int k = 0;
+
+        for (int num : nums) {
+            if (num != 0) {
+                nums[k++] = num;
+            }
+        }
+
+        while (k < n) {
+            nums[k++] = 0;
+        }
+        printArr(nums);
+    }
+
+    // Sort Array by Parity ( LeetCode 905 ) => ( partition approach )
+     public static void sortArrayByParity(int[] nums) {
+        int n = nums.length;
+        int i = -1;
+
+        for (int j = 0; j < n; j++) {
+            if (nums[j] % 2 == 0) {
+                // swap
+                i++;
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            }
+        }
+        printArr(nums);
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -571,8 +744,23 @@ public class Revision3 {
         // int arr5[] = {-4, -1, 0, 3, 10};
         // System.out.println(Arrays.toString(squareOfSortedArray(arr5)));
 
-        int arr6[] = {10, 7, 8, 9, 1, 5};
-        quickSort(arr6, 0, 5);
-        printArr(arr6);
+        // int arr6[] = {10, 7, 8, 9, 1, 5};
+        // quickSort(arr6, 0, 5);
+        // printArr(arr6);
+
+        // int arr7[] = {0, 1, 0, 1, 1, 0};
+        // binaryArraySorting(arr7);
+
+        // sortColors(new int[]{2, 0, 2, 1, 1, 0});
+        // sortColors2(new int[]{2, 0, 2, 1, 1, 0});
+
+        // threeWayPartitioning(new int[]{1, 12, 3, 4, 5, 6, 7}, 3, 5);
+
+        // System.out.println(Arrays.toString(partitionArray(new int[]{9, 12, 3, 5, 14, 10, 10}, 10)));
+
+        // moveZerosToEnd(new int[]{10, 1, 0, 3, 0});
+        // moveZerosToEnd2(new int[]{10, 1, 0, 3, 0});
+
+        // sortArrayByParity(new int[]{3, 1, 2, 4});
     }
 }

@@ -695,8 +695,51 @@ public class Revision2 {
         printArr(arr);
     }
 
+    // **************************************************************  Recursion  **************************************************************
+    // *****************************************************************************************************************************************
+
+    // factorial of a number
+    public static int factorial(int n) {
+        if (n == 0 || n == 1) return 1;
+        return n * factorial(n-1);
+    }
+
+    // Fibonacci Series
+    public static int fibonacci(int n) {
+        if (n == 0 || n == 1) return n;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    // Print Increasing And Decreasing
+    public static void printIncAndDec(int n, int i) {
+        if ( i == n) {
+            System.out.print(i+" ");
+            return;
+        }
+
+        System.out.print(i+" ");
+        printIncAndDec(n, i+1);
+        System.out.print(i+" ");
+    }
+
+    // Check if array is Sorted 
+    public static boolean isSorted(int arr[], int i) {
+        if ( i == arr.length) return true;
+        if ( i != arr.length-1 && arr[i+1] < arr[i]) return false;
+        return isSorted(arr, i+1);
+    }
+
+    // Tower of Hanoi
+    public static void towerOfHanoi(int n, char src, char dest, char helper) {
+        if (n == 0) return;
+
+        towerOfHanoi(n-1, src, helper, dest);
+        System.out.println("Move "+n+" from "+src+" to "+dest);
+        towerOfHanoi(n-1, helper, dest, src);
+    }
+
     public static void main(String[] args) {
-        int arr[] = { 2, 5, 4, 7, 6};
+        // int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
@@ -745,6 +788,12 @@ public class Revision2 {
         // sortArrayByParityII(new int[]{4,2,5,7});
         // sortArrayByParityII2(new int[]{4,2,5,7});
 
-        rearrangeBySign(new int[]{1, -1, 3, -2, 4, -3});
+        // rearrangeBySign(new int[]{1, -1, 3, -2, 4, -3});
+
+        // System.out.println(factorial(5));
+        // System.out.println(fibonacci(5));
+        // printIncAndDec(5, 1);
+        // System.out.println(isSorted(new int[] { 1, 5, 2, 4}, 0));
+        towerOfHanoi(3, 'A', 'C', 'B');
     }
 }  

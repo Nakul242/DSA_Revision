@@ -1,4 +1,3 @@
-import java.security.PublicKey;
 import java.util.*;
 
 class Revision1 {
@@ -873,7 +872,7 @@ class Revision1 {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 2, 8, 6, 4, 10};
+        // int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);

@@ -134,6 +134,40 @@ class Revision1 {
         return temp;
     }
 
+    // Standard Merge Sort
+    public static void mergeSort2(int arr[], int s, int e) {
+        if (s >= e) return;
+
+        int mid = s + (e - s)/2;
+        mergeSort2(arr, s, mid);
+        mergeSort2(arr, mid+1, e);
+        mergeInPlace(arr, s, mid, e);
+    }
+
+    public static void mergeInPlace(int arr[], int s, int mid, int e) {
+        int i = s;
+        int j = mid+1;
+        int k = 0;
+
+        int temp[] = new int[e-s+1];
+
+        while (i <= mid && j <= e) {
+            if (arr[i] < arr[j]) {
+                temp[k++] = arr[i++];
+            }
+            else {
+                temp[k++] = arr[j++];
+            }
+        }
+
+        while (i <= mid) temp[k++] = arr[i++];
+        while (j <= e) temp[k++] = arr[j++];
+
+        for (i=s, k=0; i<=e; i++, k++) {
+            arr[i] = temp[k];
+        }
+    }
+
     // Merge Sorted Arrays ( leetCode 88) => ( Two Pointer Approach )
     // Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
     // Output: [1,2,2,3,5,6]
@@ -893,7 +927,7 @@ class Revision1 {
         ans.add(new ArrayList<>(list));
 
         for (int i=start; i<arr.length; i++) {
-            
+
             list.add(arr[i]);
             subsets2(arr, i+1, list, ans);
             list.remove(list.size()-1);
@@ -909,7 +943,60 @@ class Revision1 {
             if (i > start && arr[i] == arr[i-1]) continue;
 
             list.add(arr[i]);
+            // System.out.println(list);
             subsetsWithDup(arr, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
+    //  All combinations of size r from an array ( GFG ) => ( Using Recursion and Fixing The Elements Approach )
+    public static void combinations(int arr[], int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=start; i<arr.length; i++) {
+            list.add(arr[i]);
+            combinations(arr, r, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
+    // All combinations of size r from an array ( GFG ) => ( Using Recursion and Including - Excluding Each Element Approach )
+    public static void combinations2(int arr[], int r, int i, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        if (i == arr.length) {
+            return;
+        }
+
+        // include
+        list.add(arr[i]);
+        combinations2(arr, r, i+1, list, ans);
+
+        list.remove(list.size()-1);
+
+        // exclude
+        combinations2(arr, r, i+1, list, ans);
+    }
+
+    // All combinations of size r from n numbers ( GFG ) => ( Using Sort to Handle The Duplicate Elements in Input Approach )
+    public static void combinations3(int arr[], int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=start; i<arr.length; i++) {
+
+            if (i > start && arr[i] == arr[i-1]) continue;
+
+            list.add(arr[i]);
+            combinations3(arr, r, i+1, list, ans);
             list.remove(list.size()-1);
         }
     }
@@ -997,10 +1084,16 @@ class Revision1 {
 
         // System.out.println("Power of 2^5 = " + power(2, 5));
 
-        List<List<Integer>> ans = new ArrayList<>();
+        // List<List<Integer>> ans = new ArrayList<>();
         // subsets(new int[]{1, 2, 3}, 0, new ArrayList<>(), ans);
         // subsets2(new int[]{1, 2, 3}, 0, new ArrayList<>(), ans);
-        subsetsWithDup(new int[]{1, 2, 2}, 0, new ArrayList<>(), ans);
-        System.out.println(ans);
+        // subsetsWithDup(new int[]{1, 2, 2}, 0, new ArrayList<>(), ans);
+        // System.out.println(ans);
+
+        // List<List<Integer>> ans = new ArrayList<>();
+        // combinations(new int[]{1, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
+        // combinations2(new int[]{1, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
+        // combinations3(new int[]{1, 2, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
+        // System.out.println(ans);
     }
 }

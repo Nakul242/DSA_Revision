@@ -738,7 +738,67 @@ public class Revision2 {
         towerOfHanoi(n-1, helper, dest, src);
     }
 
-    
+    // Largest ele. in an array
+    public static int largestEle(int arr[], int i, int mid) {
+        if ( i == arr.length ) return mid;
+        if ( arr[i] > mid ) mid = arr[i];
+
+        return largestEle(arr, i+1, mid);
+    }
+
+    public static int largestEle2(int arr[], int i) {
+        if ( i == arr.length ) return 1;
+        return Math.max(arr[i],largestEle2(arr, i+1));
+    }
+
+    // first and last occurrence of an ele. in an array
+    public static int[] firstAndLastOcc(int arr[], int i, int key) {
+        if ( i == arr.length ) return new int[] {-1, -1};
+
+        int res[] = firstAndLastOcc(arr, i+1, key);
+
+        if (arr[i] == key) {
+            res[0] = i; // for first occurrence
+            if (res[1] == -1) {
+                res[1] = i; // for last occurrence
+            }
+        }
+
+        return res;
+    }
+
+    public static void firstAndLastOcc2(int arr[], int i, int key, int ans[]) {
+        if ( i == arr.length ) return;
+
+        
+        if (arr[i] == key) {
+            if (ans[0] == -1) {
+                ans[0] = i; // for first occurrence
+            }
+            ans[1] = i; // for last occurrence
+        }
+
+        firstAndLastOcc2(arr, i+1, key, ans);
+    }
+
+    // Power of a number
+    public static double power(double x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;
+        if ( n < 0) {
+            x = 1 / x;
+            n = -n;
+        }
+
+        double halfPower = power(x, n/2);
+
+        if (n % 2 == 0) {
+            return halfPower * halfPower;
+        }
+        else {
+            return x * halfPower * halfPower;
+        }
+    }
 
     public static void main(String[] args) {
         // int arr[] = { 2, 5, 4, 7, 6};
@@ -796,6 +856,16 @@ public class Revision2 {
         // System.out.println(fibonacci(5));
         // printIncAndDec(5, 1);
         // System.out.println(isSorted(new int[] { 1, 5, 2, 4}, 0));
-        towerOfHanoi(3, 'A', 'C', 'B');
+        // towerOfHanoi(3, 'A', 'C', 'B');
+
+        // System.out.println(largestEle(new int[]{1, 5, 2, 4}, 0, Integer.MIN_VALUE));
+        // System.out.println(largestEle2(new int[]{1, 5, 2, 4}, 0));
+
+        // int result[] = firstAndLastOcc(new int[]{1, 5, 2, 4, 5}, 0, 5);
+        // System.out.println("First Occurrence = "+result[0]+" , Last Occurrence = "+result[1]);
+        // int ans[] = new int[] {-1, -1};
+        // firstAndLastOcc2(new int[]{1, 5, 2, 4, 5}, 0, 5, ans);
+        // System.out.println("First Occurrence = "+ans[0]+" , Last Occurrence = "+ans[1]);
+        System.out.println(power(2.0, 5));
     }
 }  

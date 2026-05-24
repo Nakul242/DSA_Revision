@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Revision2 {
     public static void printArr(int arr[]) {
@@ -800,6 +796,45 @@ public class Revision2 {
         }
     }
 
+    // Subset (leetCode 78)
+    public static void subset(int[] nums, int index, List<Integer> current, List<List<Integer>> result) {
+        if (index == nums.length) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+
+        // Include current element
+        current.add(nums[index]);
+        subset(nums, index + 1, current, result);
+        current.remove(current.size() - 1);
+
+        // Exclude current element
+        subset(nums, index + 1, current, result);
+
+    }
+
+    public static void subset2(int[] nums, int index, List<Integer> current, List<List<Integer>> result) {
+        result.add(new ArrayList<>(current));
+
+        for (int i = index; i < nums.length; i++) {
+            current.add(nums[i]);
+            subset2(nums, i + 1, current, result);
+            current.remove(current.size() - 1);
+        }
+    }
+
+    // SubsetII ( leetCode 90 ) => ( to handle duplicates in input array )
+    public static void subsetII(int[] nums, int index, List<Integer> current, List<List<Integer>> result) {
+        result.add(new ArrayList<>(current));
+
+        for (int i = index; i < nums.length; i++) {
+            if (i > index && nums[i] == nums[i-1]) continue; // skip duplicates
+            current.add(nums[i]);
+            subsetII(nums, i + 1, current, result);
+            current.remove(current.size() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -866,6 +901,17 @@ public class Revision2 {
         // int ans[] = new int[] {-1, -1};
         // firstAndLastOcc2(new int[]{1, 5, 2, 4, 5}, 0, 5, ans);
         // System.out.println("First Occurrence = "+ans[0]+" , Last Occurrence = "+ans[1]);
-        System.out.println(power(2.0, 5));
+        // System.out.println(power(2.0, 5));
+
+        // List<List<Integer>> result = new ArrayList<>();
+        // subset(new int[]{1,2,3}, 0, new ArrayList<>(), result);
+        // subset2(new int[]{1,2,3}, 0, new ArrayList<>(), result);
+        // System.out.println(result);
+
+        // List<List<Integer>> result2 = new ArrayList<>();
+        // // first sort the input array to handle duplicates
+        // Arrays.sort(new int[]{1,2,2});
+        // subsetII(new int[]{1,2,2}, 0, new ArrayList<>(), result2);
+        // System.out.println(result2);
     }
 }  

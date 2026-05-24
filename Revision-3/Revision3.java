@@ -704,6 +704,76 @@ public class Revision3 {
         printArr(nums);
     }
 
+    // Move all negative ele to end of array ( GFG ) => ( Single Array approach )
+    public static void moveNegativeToEnd(int[] arr) {
+        int ans[] = new int[arr.length];
+        int k = 0;
+
+        for (int num : arr) {
+            if (num >= 0) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int num : arr) {
+            if (num < 0) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = ans[i];
+        }
+
+        printArr(arr);
+    }
+
+    // Sort Array by Parity ( LeetCode 922 ) => ( Single Array Approach )
+    public static void sortArrayByParityII(int[] nums) {
+        int n = nums.length;
+        int ans[] = new int[n];
+        int even = 0, odd = 1;
+
+        for (int num : nums) {
+            if (num % 2 == 0) {
+                ans[even] = num;
+                even += 2;
+            }
+        }
+
+        for (int num : nums) {
+            if (num % 2 != 0) {
+                ans[odd] = num;
+                odd += 2;
+        }
+            }
+        printArr(ans);
+    }
+
+    // Sort Array by Parity ( LeetCode 922 ) => ( Two Pointer Approach )
+    public static void sortArrayByParityII2(int[] nums) {
+        int n = nums.length;
+        int even = 0, odd = 1;
+
+        while (even < n && odd < n) {
+            if (nums[even] % 2 == 0) {
+                even += 2;
+            }
+            else if (nums[odd] % 2 != 0) {
+                odd += 2;
+            }
+            else {
+                // swap
+                int temp = nums[even];
+                nums[even] = nums[odd];
+                nums[odd] = temp;
+                even += 2;
+                odd += 2;
+            }
+        }
+        printArr(nums);
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -762,5 +832,8 @@ public class Revision3 {
         // moveZerosToEnd2(new int[]{10, 1, 0, 3, 0});
 
         // sortArrayByParity(new int[]{3, 1, 2, 4});
+        // sortArrayByParityII(new int[]{4, 2, 5, 7});
+        sortArrayByParityII2(new int[]{4, 2, 5, 7});
+        // moveNegativeToEnd(new int[]{-1, 2, -3, 4, 5, -6});
     }
 }

@@ -224,7 +224,7 @@ public class Revision4 {
     }
 
     public static void main(String[] args) {
-        int arr[] = {5, 4, 1, 3, 2};
+        // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);

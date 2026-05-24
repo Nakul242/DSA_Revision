@@ -147,6 +147,82 @@ public class Revision4 {
         }
     }
 
+    // Merge Sorted Array - Leetcode 88
+     public static void mergeSortedArray(int arr1[], int arr2[], int m, int n) {
+        int i = m-1;
+        int j = n-1;
+        int k = m+n-1;
+
+        while (i >= 0 && j >= 0) {
+            if (arr1[i] > arr2[j]) {
+                arr1[k--] = arr1[i--];
+            }
+            else {
+                arr1[k--] = arr2[j--];
+            }
+        }
+
+        while (j >= 0) {
+            arr1[k--] = arr2[j--];
+        }
+
+        printArr(arr1);
+    }
+
+    // Merge Without Extra Space - GFG => ( Gap Method )
+    public static int nextGap(int gap) {
+        if (gap <= 1) return 0;
+        return (gap/2) + (gap%2);
+    }
+
+    public static void mergeWithoutExtraSpace(int a[], int b[]) {
+        int n = a.length;
+        int m = b.length;
+
+        int gap = nextGap(n + m);
+
+        while (gap > 0) {
+            int i = 0;
+            while (i + gap < n) {
+                if (a[i] > a[i + gap]) {
+                    int temp = a[i];
+                    a[i] = a[i + gap];
+                    a[i + gap] = temp;
+                }
+                i++;
+            }
+
+            int j = gap > n ? gap - n : 0;
+            while (i < n && j < m) {
+                if (a[i] > b[j]) {
+                    int temp = a[i];
+                    a[i] = b[j];
+                    b[j] = temp;
+                }
+                i++;
+                j++;
+            }
+
+            if (j < m) {
+                j = 0;
+                while (j + gap < m) {
+                    if (b[j] > b[j + gap]) {
+                        int temp = b[j];
+                        b[j] = b[j + gap];
+                        b[j + gap] = temp;
+                    }
+                    j++;
+                }
+            }
+
+            gap = nextGap(gap);
+        }
+
+        printArr(a);
+        System.out.println();
+        printArr(b);
+    }
+
     public static void main(String[] args) {
         int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -155,7 +231,15 @@ public class Revision4 {
         // shellSort(arr);
         // int ans[] = mergeSort(arr, 0, arr.length-1);
         // printArr(ans);
-        mergeSort2(arr, 0, arr.length-1);
-        printArr(arr);
+        // mergeSort2(arr, 0, arr.length-1);
+        // printArr(arr);
+
+        // int arr1[] = {1, 2, 3, 0, 0, 0};
+        // int arr2[] = {2, 5, 6};
+        // mergeSortedArray(arr1, arr2, 3, 3);
+
+        int a[] = {1, 4, 7, 8, 10};
+        int b[] = {2, 3, 9};
+        mergeWithoutExtraSpace(a, b);
     }
 }

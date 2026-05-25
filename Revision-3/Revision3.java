@@ -721,11 +721,7 @@ public class Revision3 {
             }
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = ans[i];
-        }
-
-        printArr(arr);
+        printArr(ans);
     }
 
     // Sort Array by Parity ( LeetCode 922 ) => ( Single Array Approach )
@@ -774,7 +770,27 @@ public class Revision3 {
         printArr(nums);
     }
 
-    
+    // Rearrange the array in alternating positive and negative items with O(1) extra space  (leetcode 2149) => ( Single Array Approach 
+    public static void rearrangeAlternating(int[] nums) {
+        int n = nums.length;
+        int ans[] = new int[n];
+        int pos = 0, neg = 1;
+
+        for (int num : nums) {
+            if (num >= 0) {
+                ans[pos] = num;
+                pos += 2;
+            }
+        }
+
+        for (int num : nums) {
+            if (num < 0) {
+                ans[neg] = num;
+                neg += 2;
+            }
+        }
+        printArr(ans);
+    }
 
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
@@ -837,5 +853,7 @@ public class Revision3 {
         // sortArrayByParityII(new int[]{4, 2, 5, 7});
         // sortArrayByParityII2(new int[]{4, 2, 5, 7});
         // moveNegativeToEnd(new int[]{-1, 2, -3, 4, 5, -6});
+
+        rearrangeAlternating(new int[]{1, 2, -3, -4, 5});
     }
 }

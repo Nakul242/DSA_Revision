@@ -317,6 +317,57 @@ public class Revision4 {
         return result;
     }
 
+    // Intersection of Arrays ( leetcode 350 ) => ( Sorting + Two Pointer Approach )
+    public static int[] intersectionOfTwo3(int a[], int b[]) {
+        Arrays.sort(a);
+        Arrays.sort(b);
+
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+
+        while (i < a.length && j < b.length) {
+            if (a[i] == b[j]) {
+                list.add(a[i]);
+                i++; j++;
+            }
+            else if (a[i] < b[j]) {
+                i++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        int[] result = new int[list.size()];
+        for (int k = 0; k < list.size(); k++) {
+            result[k] = list.get(k);
+        }
+
+        return result;
+    }
+
+    // Intersection of Arrays ( leetcode 350 ) => ( Brute Force Approach )
+    public static int[] intersectionOfTwo4(int a[], int b[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                if (a[i] == b[j]) {
+                    if (!list.contains(a[i])) {
+                        list.add(a[i]);
+                    }
+                }
+            }
+        }
+
+        int[] result = new int[list.size()];
+        for (int k = 0; k < list.size(); k++) {
+            result[k] = list.get(k);
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -340,6 +391,8 @@ public class Revision4 {
         int b[] = {2, 3, 5, 7};
         // System.out.println(unionOfTwoSorted(a, b));
         // System.out.println(intersectionOfTwo(a, b));
-        System.out.println(Arrays.toString(intersectionOfTwo2(a, b)));
+        // System.out.println(Arrays.toString(intersectionOfTwo2(a, b)));
+        System.out.println(Arrays.toString(intersectionOfTwo3(a, b)));
+        System.out.println(Arrays.toString(intersectionOfTwo4(a, b)));
     }
 }

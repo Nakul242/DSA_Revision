@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Revision4 {
     public static void printArr(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
@@ -223,6 +225,98 @@ public class Revision4 {
         printArr(b);
     }
 
+    // Union of two sorted arrays ( GFG ) => ( Two Pointer Approach )
+    public static ArrayList<Integer> unionOfTwoSorted(int a[], int b[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int val = 0;
+        int i = 0;
+        int j = 0;
+
+        while (i < a.length  && j < b.length) {
+            if (a[i] == b[j]) {
+                val = a[i];
+                i++; j++;
+            }
+            else if (a[i] < b[j]) {
+                val = a[i];
+                i++;
+            }
+            else {
+                val = b[j];
+                j++;
+            }
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        while (i < a.length) {
+            val = a[i++];
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        while (j < b.length) {
+            val = b[j++];
+
+            if (list.isEmpty() || list.get(list.size()-1) != val) {
+                list.add(val);
+            }
+        }
+
+        return list;
+    }
+
+    // Intersection of Arrays ( leetcode 349 ) => ( Two Pointer Approach )
+    public static ArrayList<Integer> intersectionOfTwo(int a[], int b[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+
+        while (i < a.length && j < b.length) {
+            if (a[i] == b[j]) {
+                if (list.isEmpty() || list.get(list.size()-1) != a[i]) {
+                    list.add(a[i]);
+                }
+                i++; j++;
+            }
+            else if (a[i] < b[j]) {
+                i++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        return list;
+    }
+
+    // Intersection of Arrays ( leetcode 349 ) => ( HashSet Approach )
+    public static int[] intersectionOfTwo2(int a[], int b[]) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+
+        for (int num : a) {
+            set.add(num);
+        }
+
+        for (int num : b) {
+            if (set.contains(num)) {
+                set2.add(num);
+            }
+        }
+
+        int[] result = new int[set2.size()];
+        int index = 0;
+        for (int num : set2) {
+            result[index++] = num;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -238,8 +332,14 @@ public class Revision4 {
         // int arr2[] = {2, 5, 6};
         // mergeSortedArray(arr1, arr2, 3, 3);
 
-        int a[] = {1, 4, 7, 8, 10};
-        int b[] = {2, 3, 9};
-        mergeWithoutExtraSpace(a, b);
+        // int a[] = {1, 4, 7, 8, 10};
+        // int b[] = {2, 3, 9};
+        // mergeWithoutExtraSpace(a, b);
+
+        int a[] = {1, 2, 4, 5, 6};
+        int b[] = {2, 3, 5, 7};
+        // System.out.println(unionOfTwoSorted(a, b));
+        // System.out.println(intersectionOfTwo(a, b));
+        System.out.println(Arrays.toString(intersectionOfTwo2(a, b)));
     }
 }

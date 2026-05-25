@@ -774,6 +774,8 @@ public class Revision3 {
         printArr(nums);
     }
 
+    
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -833,7 +835,7 @@ public class Revision3 {
 
         // sortArrayByParity(new int[]{3, 1, 2, 4});
         // sortArrayByParityII(new int[]{4, 2, 5, 7});
-        sortArrayByParityII2(new int[]{4, 2, 5, 7});
+        // sortArrayByParityII2(new int[]{4, 2, 5, 7});
         // moveNegativeToEnd(new int[]{-1, 2, -3, 4, 5, -6});
     }
 }

@@ -864,6 +864,44 @@ class Revision1 {
         towerOfHanoi(n-1, helper, src, dest);
     }
 
+    // Reverse the Stack (GFG) => ( Using Recursion and Stack Data Structure )
+    public static void reverseStack(Stack<Integer> st) {
+        if (st.isEmpty()) return;
+
+        int top = st.pop();
+        reverseStack(st);
+        insertAtBottom(st, top);
+    }
+
+    public static void insertAtBottom(Stack<Integer> st, int val) {
+        if (st.isEmpty()) {
+            st.push(val);
+            return;
+        }
+
+        int top = st.pop();
+        insertAtBottom(st, val);
+        st.push(top);
+    }
+
+    // Reverse the Stack (GFG) => ( Using Recursion and Two Stacks Data Structure )
+    public static void reverseStack2(Stack<Integer> st) {
+        if (st.isEmpty()) return;
+
+        int top = st.pop();
+        reverseStack2(st);
+        
+        Stack<Integer> temp = new Stack<>();
+        while (!st.isEmpty()) {
+            temp.push(st.pop());
+        }
+
+        st.push(top);
+        while (!temp.isEmpty()) {
+            st.push(temp.pop());
+        }
+    }
+
     // Largest element in array
     public static int largest(int arr[], int i) {
         if (i == arr.length-1) return arr[i];
@@ -1074,6 +1112,16 @@ class Revision1 {
         // printIncAndDec(5,1);
         // System.out.println(isSorted(new int[]{1, 2, 3, 4, 5}, 0));
         // towerOfHanoi(3, 'A', 'B', 'C');
+
+        Stack<Integer> st = new Stack<>();
+        st.push(1);
+        st.push(3);
+        st.push(2);
+        // reverseStack(st);
+        reverseStack2(st);
+        System.out.println(st);
+
+
         // System.out.println(largest(new int[]{1, 2, 13, 4, 5}, 0));
         // System.out.println(largest2(new int[]{1, 2, 13, 4, 5}, 0, Integer.MIN_VALUE));
         

@@ -863,6 +863,55 @@ public class Revision3 {
         towerOfHanoi(n-1, helper, dest, src);
     }
 
+    // Largest Element in an Array ( GFG ) => ( Recursion )
+    public static int largestElement(int arr[], int i) {
+        if (i == arr.length-1) {
+            return arr[i];
+        }
+
+        int max = largestElement(arr, i+1);
+        return Math.max(arr[i], max);
+    }
+
+    public static int largestElement2(int arr[], int i, int max) {
+        if (i == arr.length) {
+            return max;
+        }
+
+        return largestElement2(arr, i+1, Math.max(max, arr[i]));
+    }
+
+    // Find first and last occurrence of an element in an array ( GFG ) => ( Recursion )
+    public static int[] firstAndLastOccurrence(int arr[], int i, int key) {
+        if (i == arr.length) {
+            return new int[]{-1, -1};
+        }
+
+        int res[] = firstAndLastOccurrence(arr, i+1, key);
+        if (arr[i] == key) {
+            res[0] = i;
+            if (res[1] == -1) {
+                res[1] = i;
+            }
+        }
+        return res;
+    }
+
+    public static void firstAndLastOccurrence2(int arr[], int i, int key, int res[]) {
+        if (i == arr.length) {
+            return;
+        }
+
+        if (arr[i] == key) {
+            if (res[0] == -1) {
+                res[0] = i;
+            }
+            res[1] = i;
+        }
+
+        firstAndLastOccurrence2(arr, i+1, key, res);
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -927,12 +976,20 @@ public class Revision3 {
 
         // rearrangeAlternating(new int[]{1, 2, -3, -4, 5});
 
-            // System.out.println(factorial(5));
-            // System.out.println(factorialTailRecursion(5, 1));
-            // System.out.println(fibonacci(10));
-            // System.out.println(fibonacciTailRecursion(10, 0, 1));
-            // printIncreasingDecreasing(5, 1);
-            // System.out.println(isSorted(new int[]{1, 2, 3, 4}, 0));
-            towerOfHanoi(3, 'A', 'C', 'B');
+        // System.out.println(factorial(5));
+        // System.out.println(factorialTailRecursion(5, 1));
+        // System.out.println(fibonacci(10));
+        // System.out.println(fibonacciTailRecursion(10, 0, 1));
+        // printIncreasingDecreasing(5, 1);
+        // System.out.println(isSorted(new int[]{1, 2, 3, 4}, 0));
+        // towerOfHanoi(3, 'A', 'C', 'B');
+
+        // System.out.println(largestElement(new int[]{1, 2, 3, 4}, 0));
+        // System.out.println(largestElement2(new int[]{1, 2, 3, 4}, 0, Integer.MIN_VALUE));
+        // System.out.println(Arrays.toString(firstAndLastOccurrence(new int[]{1, 2, 3, 2, 1}, 0, 2)));
+        // int res[] = {-1, -1};
+        // firstAndLastOccurrence2(new int[]{1, 2, 3, 2, 1}, 0, 2, res);
+        // System.out.println(Arrays.toString(res));
+
     }
 }

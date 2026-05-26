@@ -792,6 +792,77 @@ public class Revision3 {
         printArr(ans);
     }
 
+    // Factorial of a number ( GFG ) => ( Recursion )
+    public static int factorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        return n * factorial(n-1);
+    }
+
+    // Factorial of a number ( GFG ) => ( Recursion => Tail Recursion )
+    public static int factorialTailRecursion(int n, int ans) {
+        if (n == 0 || n == 1) {
+            return ans;
+        }
+        return factorialTailRecursion(n-1, n*ans);
+    }
+
+    // Fibonacci Number ( GFG ) => ( Recursion )
+    public static int fibonacci(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        }
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    // Fibonacci Number ( GFG ) => ( Recursion => Tail Recursion )
+    public static int fibonacciTailRecursion(int n, int a, int b) {
+        if (n == 0) {
+            return a;
+        }
+        if (n == 1) {
+            return b;
+        }
+        return fibonacciTailRecursion(n-1, b, a+b);
+    }
+
+    // Print Increasing and Decreasing ( GFG ) => ( Recursion )
+    public static void printIncreasingDecreasing(int n, int i) {
+        if (i == n) {
+            System.out.print(i+" ");
+            return;
+        }
+
+        System.out.print(i+" ");
+        printIncreasingDecreasing(n, i+1);
+        System.out.print(i+" ");
+    }
+
+    // Check if array is sorted ( GFG ) => ( Recursion )
+    public static boolean isSorted(int arr[], int i) {
+        if (i == arr.length-1) {
+            return true;
+        }
+
+        if (arr[i] > arr[i+1]) {
+            return false;
+        }
+
+        return isSorted(arr, i+1);
+    }
+
+    // Tower of Hanoi ( GFG ) => ( Recursion )
+    public static void towerOfHanoi(int n, char src, char dest, char helper) {
+        if (n == 0) {
+            return;
+        }
+
+        towerOfHanoi(n-1, src, helper, dest);
+        System.out.println("Move disk "+n+" from "+src+" to "+dest);
+        towerOfHanoi(n-1, helper, dest, src);
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -854,6 +925,14 @@ public class Revision3 {
         // sortArrayByParityII2(new int[]{4, 2, 5, 7});
         // moveNegativeToEnd(new int[]{-1, 2, -3, 4, 5, -6});
 
-        rearrangeAlternating(new int[]{1, 2, -3, -4, 5});
+        // rearrangeAlternating(new int[]{1, 2, -3, -4, 5});
+
+            // System.out.println(factorial(5));
+            // System.out.println(factorialTailRecursion(5, 1));
+            // System.out.println(fibonacci(10));
+            // System.out.println(fibonacciTailRecursion(10, 0, 1));
+            // printIncreasingDecreasing(5, 1);
+            // System.out.println(isSorted(new int[]{1, 2, 3, 4}, 0));
+            towerOfHanoi(3, 'A', 'C', 'B');
     }
 }

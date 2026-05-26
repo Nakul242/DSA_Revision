@@ -368,6 +368,38 @@ public class Revision4 {
         return result;
     }
 
+    // Common Elements in three sorted arrays ( GFG ) => ( Three Pointer Approach )
+    public static int[] commonElementsInThreeSortedArrays(int a[], int b[], int c[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = 0, j = 0, k = 0;
+
+        while (i < a.length && j < b.length && k < c.length) {
+            if (a[i] == b[j] && b[j] == c[k]) {
+                if (list.isEmpty() || list.get(list.size()-1) != a[i]) {
+                    list.add(a[i]);
+                }
+                i++; j++; k++;
+            }
+            else if (a[i] < b[j]) {
+                i++;
+            }
+            else if (b[j] < c[k]) {
+                j++;
+            }
+            else {
+                k++;
+            }
+        }
+
+        int[] result = new int[list.size()];
+        int index = 0;
+        for (int idx : list) {
+            result[index++] = idx;
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -387,12 +419,17 @@ public class Revision4 {
         // int b[] = {2, 3, 9};
         // mergeWithoutExtraSpace(a, b);
 
-        int a[] = {1, 2, 4, 5, 6};
-        int b[] = {2, 3, 5, 7};
+        // int a[] = {1, 2, 4, 5, 6};
+        // int b[] = {2, 3, 5, 7};
         // System.out.println(unionOfTwoSorted(a, b));
         // System.out.println(intersectionOfTwo(a, b));
         // System.out.println(Arrays.toString(intersectionOfTwo2(a, b)));
-        System.out.println(Arrays.toString(intersectionOfTwo3(a, b)));
-        System.out.println(Arrays.toString(intersectionOfTwo4(a, b)));
+        // System.out.println(Arrays.toString(intersectionOfTwo3(a, b)));
+        // System.out.println(Arrays.toString(intersectionOfTwo4(a, b)));
+
+        int a[] = {1, 5, 10, 20, 40, 80};
+        int b[] = {6, 7, 20, 80, 100};
+        int c[] = {3, 4, 15, 20, 30, 70, 80, 120};
+        System.out.println(Arrays.toString(commonElementsInThreeSortedArrays(a, b, c)));
     }
 }

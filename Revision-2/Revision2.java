@@ -835,6 +835,20 @@ public class Revision2 {
         }
     }
 
+    // Combination ( LeetCode 77) => ( Using Recursion and Fixing The Elements Approach )
+    public static void combination(int n, int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=start; i<=n; i++) {
+            list.add(i);
+            combination(n, r, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -913,5 +927,9 @@ public class Revision2 {
         // Arrays.sort(new int[]{1,2,2});
         // subsetII(new int[]{1,2,2}, 0, new ArrayList<>(), result2);
         // System.out.println(result2);
+
+        // List<List<Integer>> ans = new ArrayList<>();
+        // combination(4, 2, 1, new ArrayList<>(), ans);
+        // System.out.println(ans);
     }
 }  

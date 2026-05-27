@@ -1039,6 +1039,38 @@ class Revision1 {
         }
     }
 
+    // Combination ( LeetCode 77) => ( Using Recursion and Fixing The Elements Approach )
+    public static void combination(int n, int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=start; i<=n; i++) {
+            list.add(i);
+            combination(n, r, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
+    // Factor Combinations ( Coding Ninjas ) => ( Using Recursion and Fixing The Elements Approach )
+    public static void factorCombinations(int n, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (n == 1) {
+            if (list.size() > 1) { // to avoid adding the combination of single element which is same as input number
+                ans.add(new ArrayList<>(list));
+            }
+            return;
+        }
+
+        for (int i=start; i<=n; i++) {
+            if (n % i == 0) {
+                list.add(i);
+                factorCombinations(n/i, i, list, ans);
+                list.remove(list.size()-1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 6, 4, 10};
         // bubbleSort(arr);
@@ -1113,13 +1145,13 @@ class Revision1 {
         // System.out.println(isSorted(new int[]{1, 2, 3, 4, 5}, 0));
         // towerOfHanoi(3, 'A', 'B', 'C');
 
-        Stack<Integer> st = new Stack<>();
-        st.push(1);
-        st.push(3);
-        st.push(2);
-        // reverseStack(st);
-        reverseStack2(st);
-        System.out.println(st);
+        // Stack<Integer> st = new Stack<>();
+        // st.push(1);
+        // st.push(3);
+        // st.push(2);
+        // // reverseStack(st);
+        // reverseStack2(st);
+        // System.out.println(st);
 
 
         // System.out.println(largest(new int[]{1, 2, 13, 4, 5}, 0));
@@ -1143,5 +1175,15 @@ class Revision1 {
         // combinations2(new int[]{1, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
         // combinations3(new int[]{1, 2, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
         // System.out.println(ans);
+
+        // List<List<Integer>> ans = new ArrayList<>();
+        // combination(4, 2, 1, new ArrayList<>(), ans);
+        // System.out.println(ans);
+
+        List<List<Integer>> ans = new ArrayList<>();
+        factorCombinations(12, 2, new ArrayList<>(), ans);
+        System.out.println(ans);
+
+
     }
 }

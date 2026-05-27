@@ -912,6 +912,24 @@ public class Revision3 {
         firstAndLastOccurrence2(arr, i+1, key, res);
     }
 
+    // Power of a number ( leetcode 50 ) => ( Recursion )
+    public static double power(double x, int n) {
+        if (n == 0) return 1;
+
+        if (n < 0) {
+            x = 1/x;
+            n = -n;
+        }
+
+        double half = power(x, n/2);
+        double ans = half * half;
+
+        if (n % 2 != 0) {
+            ans *= x;
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -990,6 +1008,8 @@ public class Revision3 {
         // int res[] = {-1, -1};
         // firstAndLastOccurrence2(new int[]{1, 2, 3, 2, 1}, 0, 2, res);
         // System.out.println(Arrays.toString(res));
+        System.out.println(power(2.0, -3));
+
 
     }
 }

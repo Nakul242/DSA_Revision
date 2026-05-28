@@ -473,6 +473,61 @@ public class Revision4 {
         return result;
     }
 
+    // Square of a Sorted Array ( leetcode 977 ) => ( Two Pointer Approach )
+    public static int[] squareOfSortedArray(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0, right = n - 1;
+        int index = n - 1;
+
+        while (left <= right) {
+            int first = nums[left] * nums[left];
+            int second = nums[right] * nums[right];
+
+            if (first > second) {
+                result[index--] = first;
+                left++;
+            } else {
+                result[index--] = second;
+                right--;
+            }
+        }
+
+        return result;
+    }
+
+    // Qucik Sort Algorithm
+    public static void quickSort(int arr[], int low, int high) {
+        if (low > high) return;
+
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+
+    public static int partition(int arr[], int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                // swap
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // swap pivot to correct position
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[high];
+        arr[high] = temp;
+
+        return i;
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -505,9 +560,17 @@ public class Revision4 {
         // int c[] = {3, 4, 15, 20, 30, 70, 80, 120};
         // System.out.println(Arrays.toString(commonElementsInThreeSortedArrays(a, b, c)));
 
-        int nums1[] = {1, 2, 3};
-        int nums2[] = {2, 4, 6};
-        System.out.println(findDifference(nums1, nums2));
-        System.out.println(findDifference2(nums1, nums2));
+        // int nums1[] = {1, 2, 3};
+        // int nums2[] = {2, 4, 6};
+        // System.out.println(findDifference(nums1, nums2));
+        // System.out.println(findDifference2(nums1, nums2));
+
+        // int nums[] = {-4, -1, 0, 3, 10};
+        // System.out.println(Arrays.toString(squareOfSortedArray(nums)));
+
+        int nums[] = {10, 7, 8, 9, 1, 5};
+        quickSort(nums, 0, nums.length-1);
+        printArr(nums);
+
     }
 }

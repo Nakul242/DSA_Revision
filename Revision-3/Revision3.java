@@ -930,6 +930,49 @@ public class Revision3 {
         return ans;
     }
 
+    // Subsets ( LeetCode 78 ) => ( Recursion => Backtracking )
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        generateSubsets(nums, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    public static void generateSubsets(int[] nums, int idx, List<Integer> curr, List<List<Integer>> ans) {
+        if (idx == nums.length) {
+            ans.add(new ArrayList<>(curr));
+            return;
+        }
+
+        // Exclude current element
+        generateSubsets(nums, idx + 1, curr, ans);
+
+        // Include current element
+        curr.add(nums[idx]);
+        generateSubsets(nums, idx + 1, curr, ans);
+        curr.remove(curr.size() - 1);
+    }
+
+    // Subsets II ( LeetCode 90 ) => ( Recursion => Backtracking )
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums); // Sort to handle duplicates
+        generateSubsetsWithDup(nums, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    public static void generateSubsetsWithDup(int[] nums, int idx, List<Integer> curr, List<List<Integer>> ans) {
+        ans.add(new ArrayList<>(curr));
+
+        for (int i = idx; i < nums.length; i++) {
+            if (i > idx && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            curr.add(nums[i]);
+            generateSubsetsWithDup(nums, i + 1, curr, ans);
+            curr.remove(curr.size() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -1008,7 +1051,8 @@ public class Revision3 {
         // int res[] = {-1, -1};
         // firstAndLastOccurrence2(new int[]{1, 2, 3, 2, 1}, 0, 2, res);
         // System.out.println(Arrays.toString(res));
-        System.out.println(power(2.0, -3));
+        System.out.println(subsets(new int[]{1, 2, 3}));
+        System.out.println(subsetsWithDup(new int[]{1, 2, 2}));
 
 
     }

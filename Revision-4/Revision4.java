@@ -400,6 +400,79 @@ public class Revision4 {
         return result;
     }
 
+    // Find the difference between two arrays ( leetcode 2215 ) => ( HashSet Approach )
+    public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+            set2.add(num);
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        for (int num : set1) {
+            if (!set2.contains(num)) {
+                list1.add(num);
+            }
+        }
+
+        for (int num : set2) {
+            if (!set1.contains(num)) {
+                list2.add(num);
+            }
+        }
+
+        result.add(list1);
+        result.add(list2);
+
+        return result;
+    }
+
+    // Find the difference between two arrays ( leetcode 2215 ) => ( Brute Force Approach )
+    public static List<List<Integer>> findDifference2(int[] nums1, int[] nums2) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        for (int num : nums1) {
+            boolean found = false;
+            for (int num2 : nums2) {
+                if (num == num2) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && !list1.contains(num)) {
+                list1.add(num);
+            }
+        }
+
+        for (int num : nums2) {
+            boolean found = false;
+            for (int num1 : nums1) {
+                if (num == num1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && !list2.contains(num)) {
+                list2.add(num);
+            }
+        }
+
+        result.add(list1);
+        result.add(list2);
+
+        return result;
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -427,9 +500,14 @@ public class Revision4 {
         // System.out.println(Arrays.toString(intersectionOfTwo3(a, b)));
         // System.out.println(Arrays.toString(intersectionOfTwo4(a, b)));
 
-        int a[] = {1, 5, 10, 20, 40, 80};
-        int b[] = {6, 7, 20, 80, 100};
-        int c[] = {3, 4, 15, 20, 30, 70, 80, 120};
-        System.out.println(Arrays.toString(commonElementsInThreeSortedArrays(a, b, c)));
+        // int a[] = {1, 5, 10, 20, 40, 80};
+        // int b[] = {6, 7, 20, 80, 100};
+        // int c[] = {3, 4, 15, 20, 30, 70, 80, 120};
+        // System.out.println(Arrays.toString(commonElementsInThreeSortedArrays(a, b, c)));
+
+        int nums1[] = {1, 2, 3};
+        int nums2[] = {2, 4, 6};
+        System.out.println(findDifference(nums1, nums2));
+        System.out.println(findDifference2(nums1, nums2));
     }
 }

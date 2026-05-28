@@ -1039,6 +1039,24 @@ class Revision1 {
         }
     }
 
+    // Letter Tile Possibilities ( LeetCode 1079) => ( Using Recursion and Fixing The Elements Approach )
+    public static void letterTilePossibilities(String str, boolean[] used, StringBuilder sb, List<String> ans) {
+
+        for (int i=0; i<str.length(); i++) {
+            if (used[i]) continue;
+            if (i > 0 && str.charAt(i) == str.charAt(i-1) && !used[i-1]) continue;
+
+            used[i] = true;
+            sb.append(str.charAt(i));
+            ans.add(sb.toString());
+
+            letterTilePossibilities(str, used, sb, ans);
+
+            sb.deleteCharAt(sb.length()-1);
+            used[i] = false;
+        }
+    }
+
     // Combination ( LeetCode 77) => ( Using Recursion and Fixing The Elements Approach )
     public static void combination(int n, int r, int start, List<Integer> list, List<List<Integer>> ans) {
         if (list.size() == r) {
@@ -1176,13 +1194,17 @@ class Revision1 {
         // combinations3(new int[]{1, 2, 2, 3, 4}, 2, 0, new ArrayList<>(), ans);
         // System.out.println(ans);
 
+        List<String> ans = new ArrayList<>();
+        letterTilePossibilities("AAB", new boolean["AAB".length()], new StringBuilder(), ans);
+        System.out.println(ans);
+
         // List<List<Integer>> ans = new ArrayList<>();
         // combination(4, 2, 1, new ArrayList<>(), ans);
         // System.out.println(ans);
 
-        List<List<Integer>> ans = new ArrayList<>();
-        factorCombinations(12, 2, new ArrayList<>(), ans);
-        System.out.println(ans);
+        // List<List<Integer>> ans = new ArrayList<>();
+        // factorCombinations(12, 2, new ArrayList<>(), ans);
+        // System.out.println(ans);
 
 
     }

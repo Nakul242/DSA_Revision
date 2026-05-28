@@ -835,6 +835,55 @@ public class Revision2 {
         }
     }
 
+    //  All combinations of size r from an array ( GFG ) => ( Using Recursion and Fixing The Elements Approach )
+    public static void combination(int arr[], int r, int index, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=index; i<arr.length; i++) {
+            list.add(arr[i]);
+            combination(arr, r, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
+    // All combinations of size r from an array ( GFG ) => ( Using Recursion and Including - Excluding Each Element Approach )
+    public static void combination2(int arr[], int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        if (start == arr.length) {
+            return;
+        }
+
+        // include current element
+        list.add(arr[start]);
+        combination2(arr, r, start+1, list, ans);
+        list.remove(list.size()-1);
+
+        // exclude current element
+        combination2(arr, r, start+1, list, ans);
+    }
+
+    // All combinations of size r from n numbers ( GFG ) => ( Using Sort to Handle The Duplicate Elements in Input Approach )
+    public static void combination3(int arr[], int r, int start, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i=start; i<arr.length; i++) {
+            if (i > start && arr[i] == arr[i-1]) continue; // skip duplicates
+            list.add(arr[i]);
+            combination3(arr, r, i+1, list, ans);
+            list.remove(list.size()-1);
+        }
+    }
+
     // Combination ( LeetCode 77) => ( Using Recursion and Fixing The Elements Approach )
     public static void combination(int n, int r, int start, List<Integer> list, List<List<Integer>> ans) {
         if (list.size() == r) {
@@ -928,8 +977,12 @@ public class Revision2 {
         // subsetII(new int[]{1,2,2}, 0, new ArrayList<>(), result2);
         // System.out.println(result2);
 
-        // List<List<Integer>> ans = new ArrayList<>();
-        // combination(4, 2, 1, new ArrayList<>(), ans);
-        // System.out.println(ans);
+        int arr[] = {1, 2, 2, 3};
+        Arrays.sort(arr);
+        List<List<Integer>> ans = new ArrayList<>();
+        // combination(arr, 2, 0, new ArrayList<>(), ans);
+        combination2(arr, 2, 0, new ArrayList<>(), ans);
+        // combination3(arr, 2, 0, new ArrayList<>(), ans);
+        System.out.println(ans);
     }
 }  

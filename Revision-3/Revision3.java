@@ -1051,8 +1051,8 @@ public class Revision3 {
         // int res[] = {-1, -1};
         // firstAndLastOccurrence2(new int[]{1, 2, 3, 2, 1}, 0, 2, res);
         // System.out.println(Arrays.toString(res));
-        System.out.println(subsets(new int[]{1, 2, 3}));
-        System.out.println(subsetsWithDup(new int[]{1, 2, 2}));
+        // System.out.println(subsets(new int[]{1, 2, 3}));
+        // System.out.println(subsetsWithDup(new int[]{1, 2, 2}));
 
 
     }

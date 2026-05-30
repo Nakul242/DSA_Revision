@@ -528,6 +528,8 @@ public class Revision4 {
         return i;
     }
 
+    // 
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -568,9 +570,9 @@ public class Revision4 {
         // int nums[] = {-4, -1, 0, 3, 10};
         // System.out.println(Arrays.toString(squareOfSortedArray(nums)));
 
-        int nums[] = {10, 7, 8, 9, 1, 5};
-        quickSort(nums, 0, nums.length-1);
-        printArr(nums);
+        // int nums[] = {10, 7, 8, 9, 1, 5};
+        // quickSort(nums, 0, nums.length-1);
+        // printArr(nums);
 
     }
 }

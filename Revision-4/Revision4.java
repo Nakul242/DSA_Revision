@@ -666,6 +666,90 @@ public class Revision4 {
         }
     }
 
+    // Move all negative ele to end ( GFG ) => ( Single Array Approach )
+    public static void moveNegativeToEnd(int[] arr) {
+        int ans[] = new int[arr.length];
+        int k = 0;
+
+        for (int num : arr) {
+            if (num >= 0) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int num : arr) {
+            if (num < 0) {
+                ans[k++] = num;
+            }
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = ans[i];
+        }
+    }
+
+    // Sort the Array By Parity II ( leetcode 922 ) => ( Two Pointer Approach )
+    public static void sortArrayByParityII(int[] nums) {
+        int evenIdx = 0;
+        int oddIdx = 1;
+
+        while (evenIdx < nums.length && oddIdx < nums.length) {
+            if (nums[evenIdx] % 2 == 0) {
+                evenIdx += 2;
+            } else if (nums[oddIdx] % 2 == 1) {
+                oddIdx += 2;
+            } else {
+                // swap
+                int temp = nums[evenIdx];
+                nums[evenIdx] = nums[oddIdx];
+                nums[oddIdx] = temp;
+
+                evenIdx += 2; oddIdx += 2;
+            }
+        }
+    }
+
+    // Sort the Array By Parity II ( leetcode 922 ) => ( Single Pass Approach )
+    public static void sortArrayByParityII2(int[] nums) {
+        int evenIdx = 0;
+        int oddIdx = 1;
+        int ans[] = new int[nums.length];
+
+        for (int num : nums) {
+            if (num % 2 == 0) {
+                ans[evenIdx] = num;
+                evenIdx += 2;
+            } else {
+                ans[oddIdx] = num;
+                oddIdx += 2;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = ans[i];
+        }
+    }
+
+    // Rearrange the array ele by sign ( leetcode 2149 ) => ( Single Pass Approach )
+    public static void rearrangeArrayBySign(int[] nums) {
+        int posIdx = 0;
+        int negIdx = 1;
+        int ans[] = new int[nums.length];
+
+        for (int num : nums) {
+            if (num >= 0) {
+                ans[posIdx] = num;
+                posIdx += 2;
+            } else {
+                ans[negIdx] = num;
+                negIdx += 2;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = ans[i];
+        }
+    }
+
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -733,8 +817,24 @@ public class Revision4 {
         // moveZerosToEnd(nums);
         // printArr(nums);
 
-        int nums[] = {3, 1, 2, 4};
-        sortArrayByParity(nums);
-        printArr(nums);
+        // int nums[] = {3, 1, 2, 4};
+        // sortArrayByParity(nums);
+        // printArr(nums);
+
+        // int arr[] = {-1, 2, -3, 4, 5, -6};
+        // moveNegativeToEnd(arr);
+        // printArr(arr);
+
+        // int nums[] = {4, 2, 5, 7, 6, 1, 3, 0};
+        // sortArrayByParityII(nums);
+        // sortArrayByParityII2(nums);
+        // printArr(nums);
+
+        // int nums2[] = {3, 1, -2, -5, 2, -4};
+        // rearrangeArrayBySign(nums2);
+        // printArr(nums2);
+
+        
+
     }
 }

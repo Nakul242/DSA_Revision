@@ -930,6 +930,48 @@ public class Revision3 {
         return ans;
     }
 
+    // Reverse the Stack ( GFG ) => ( Recursion )
+    public static void reverseStack(Stack<Integer> stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        int top = stack.pop();
+        reverseStack(stack);
+        insertAtBottom(stack, top);
+    }
+
+    public static void insertAtBottom(Stack<Integer> stack, int val) {
+        if (stack.isEmpty()) {
+            stack.push(val);
+            return;
+        }
+
+        int top = stack.pop();
+        insertAtBottom(stack, val);
+        stack.push(top);
+    }
+
+    // Reverse the stack ( GFG ) => ( Recursion with extra space )
+    public static void reverseStackWithExtraSpace(Stack<Integer> stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        int top = stack.pop();
+        reverseStackWithExtraSpace(stack);
+
+        Stack<Integer> temp = new Stack<>();
+        while (!stack.isEmpty()) {
+            temp.push(stack.pop());
+        }
+
+        stack.push(top);
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
+    }
+
     // Subsets ( LeetCode 78 ) => ( Recursion => Backtracking )
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
@@ -1051,9 +1093,20 @@ public class Revision3 {
         // int res[] = {-1, -1};
         // firstAndLastOccurrence2(new int[]{1, 2, 3, 2, 1}, 0, 2, res);
         // System.out.println(Arrays.toString(res));
+        // System.out.println(power(2, 10));
+
+        //  Stack<Integer> stack = new Stack<>();
+        //  stack.push(1);
+        //  stack.push(2);
+        //  stack.push(3);
+        //  reverseStack(stack);
+        // reverseStackWithExtraSpace(stack);
+        // System.out.println(stack);
+
         // System.out.println(subsets(new int[]{1, 2, 3}));
         // System.out.println(subsetsWithDup(new int[]{1, 2, 2}));
 
 
+        
     }
 }

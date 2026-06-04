@@ -749,6 +749,59 @@ public class Revision4 {
         }
     }
 
+    // Factorial of a number ( GFG ) => ( Recursive Approach )
+    public static long factorial(int n) {
+        if (n == 0 || n == 1) return 1;
+        return n * factorial(n - 1);
+    }
+
+    // Factorial of a number ( GFG ) => ( Tail Recursive Approach )
+    public static long factorialTailRecursive(int n, long ans) {
+        if (n == 0 || n == 1) return ans;
+        return factorialTailRecursive(n - 1, n * ans);
+    }
+
+    // Fibonacci Number ( GFG ) => ( Recursive Approach )
+    public static long fibonacci(int n) {
+        if (n == 0 || n == 1) return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    // Fibonacci Number ( GFG ) => ( Tail Recursive Approach )
+    public static long fibonacciTailRecursive(int n, long a, long b) {
+        if (n == 0) return a;
+        if (n == 1) return b;
+        return fibonacciTailRecursive(n - 1, b, a + b);
+    }
+
+    // Print Increasing and Decreasing ( GFG ) => ( Recursive Approach )
+    public static void printIncreasingDecreasing(int n, int i) {
+        if (i == n) {
+            System.out.print(n + " ");
+            return;
+        }
+        System.out.print(i + " ");
+        printIncreasingDecreasing(n, i + 1);
+        System.out.print(i + " ");
+    }
+
+    // Check if the array is sorted or not ( GFG ) => ( Recursive Approach )
+    public static boolean isSorted(int arr[], int i) {
+        if (i == arr.length - 1) return true;
+        if (arr[i] > arr[i + 1]) return false;
+        return isSorted(arr, i + 1);
+    }
+
+    // Tower of Hanoi ( GFG ) => ( Recursive Approach )
+    public static void towerOfHanoi(int n, char src, char dest, char helper) {
+        if (n == 1) {
+            System.out.println("Move disk 1 from " + src + " to " + dest);
+            return;
+        }
+        towerOfHanoi(n - 1, src, helper, dest);
+        System.out.println("Move disk " + n + " from " + src + " to " + dest);
+        towerOfHanoi(n - 1, helper, dest, src);
+    }
 
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
@@ -834,7 +887,16 @@ public class Revision4 {
         // rearrangeArrayBySign(nums2);
         // printArr(nums2);
 
-        
+        // System.out.println(factorial(5));
+        // System.out.println(factorialTailRecursive(5, 1));
+        // System.out.println(fibonacci(10));
+        // System.out.println(fibonacciTailRecursive(10, 0, 1));
+        // printIncreasingDecreasing(5, 1);
+        // int arr[] = {1, 2, 3, 4, 5};
+        // System.out.println(isSorted(arr, 0));
+        // towerOfHanoi(3, 'A', 'C', 'B');
+
+
 
     }
 }

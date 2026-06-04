@@ -1015,6 +1015,71 @@ public class Revision3 {
         }
     }
 
+    //  All combinations of size r from an array ( GFG ) => ( Using Recursion and Fixing The Elements Approach )
+    public static List<List<Integer>> combinations(int[] arr, int r) {
+        List<List<Integer>> ans = new ArrayList<>();
+        // generateCombinations(arr, 0, r, new ArrayList<>(), ans);
+        generateCombinations2(arr, 0, r, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    public static void generateCombinations(int[] arr, int start, int r, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = start; i < arr.length; i++) {
+            list.add(arr[i]);
+            generateCombinations(arr, i + 1, r, list, ans);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    // All combinations of size r from an array ( GFG ) => ( Using Recursion and Including - Excluding Each Element Approach )
+    public static void generateCombinations2(int[] arr, int idx, int r, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        if (idx == arr.length) {
+            return;
+        }
+
+        // Include current element
+        list.add(arr[idx]);
+        generateCombinations2(arr, idx + 1, r, list, ans);
+        list.remove(list.size() - 1);
+
+        // Exclude current element
+        generateCombinations2(arr, idx + 1, r, list, ans);
+    }
+
+    // All combinations of size r from n numbers ( GFG ) => ( Using Sort to Handle The Duplicate Elements in Input Approach )
+    public static List<List<Integer>> combinationsWithDup(int[] arr, int r) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(arr); // Sort to handle duplicates
+        generateCombinationsWithDup(arr, 0, r, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    public static void generateCombinationsWithDup(int[] arr, int idx, int r, List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == r) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = idx; i < arr.length; i++) {
+            if (i > idx && arr[i] == arr[i - 1]) {
+                continue;
+            }
+            list.add(arr[i]);
+            generateCombinationsWithDup(arr, i + 1, r, list, ans);
+            list.remove(list.size() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 8, 4, 10, 6, 8};
         // bubbleSort(arr);
@@ -1106,6 +1171,8 @@ public class Revision3 {
         // System.out.println(subsets(new int[]{1, 2, 3}));
         // System.out.println(subsetsWithDup(new int[]{1, 2, 2}));
 
+        // System.out.println(combinations(new int[]{1, 2, 3, 4}, 2));
+        // System.out.println(combinationsWithDup(new int[]{1, 2, 2, 3}, 2));
 
         
     }

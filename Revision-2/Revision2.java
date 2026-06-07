@@ -898,6 +898,30 @@ public class Revision2 {
         }
     }
 
+    // Letter tile Possibilities ( LeetCode 1079 ) => ( Using Recursion and Fixing The Elements Approach )
+    public static int letterTilePossibilities(String tiles) {
+        char arr[] = tiles.toCharArray();
+        Arrays.sort(arr); // to handle duplicates in input
+
+        boolean used[] = new boolean[arr.length];
+        
+        return letterTilePossibilitiesHelper(arr, used, 0);
+    }
+
+    public static int letterTilePossibilitiesHelper(char arr[], boolean used[], int count) {
+        for (int i = 0; i < arr.length; i++) {
+            if (used[i] || (i > 0 && arr[i] == arr[i-1] && !used[i-1])) {
+                continue; // skip duplicates
+            }
+
+            used[i] = true;
+            count++;
+            count = letterTilePossibilitiesHelper(arr, used, count);
+            used[i] = false;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -977,12 +1001,14 @@ public class Revision2 {
         // subsetII(new int[]{1,2,2}, 0, new ArrayList<>(), result2);
         // System.out.println(result2);
 
-        int arr[] = {1, 2, 2, 3};
-        Arrays.sort(arr);
-        List<List<Integer>> ans = new ArrayList<>();
-        // combination(arr, 2, 0, new ArrayList<>(), ans);
-        combination2(arr, 2, 0, new ArrayList<>(), ans);
-        // combination3(arr, 2, 0, new ArrayList<>(), ans);
-        System.out.println(ans);
+        // int arr[] = {1, 2, 2, 3};
+        // Arrays.sort(arr);
+        // List<List<Integer>> ans = new ArrayList<>();
+        // // combination(arr, 2, 0, new ArrayList<>(), ans);
+        // combination2(arr, 2, 0, new ArrayList<>(), ans);
+        // // combination3(arr, 2, 0, new ArrayList<>(), ans);
+        // System.out.println(ans);
+
+        System.out.println(letterTilePossibilities("AAB"));
     }
 }  

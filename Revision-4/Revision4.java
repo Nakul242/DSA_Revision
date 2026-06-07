@@ -803,6 +803,85 @@ public class Revision4 {
         towerOfHanoi(n - 1, helper, dest, src);
     }
 
+    // Largest Element in an Array ( GFG ) => ( Recursive Approach )
+    public static int largestElement(int arr[], int i) {
+        if (i == arr.length - 1) return arr[i];
+        return Math.max(arr[i], largestElement(arr, i + 1));
+    }
+
+    // Largest Element in an Array ( GFG ) => ( Tail Recursive Approach )
+    public static int largestElementTailRecursive(int arr[], int i, int max) {
+        if (i == arr.length) return max;
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+        return largestElementTailRecursive(arr, i + 1, max);
+    }
+
+    // First and Last Occurrence of an Element in an Array ( GFG ) => ( Recursive Approach )
+    public static int[] firstAndLastOccurrence(int arr[], int i, int target, int first, int last) {
+        if (i == arr.length) return new int[]{first, last};
+        if (arr[i] == target) {
+            if (first == -1) {
+                first = i;
+            }
+            last = i;
+        }
+        return firstAndLastOccurrence(arr, i + 1, target, first, last);
+    }
+
+    // Power of a Number ( leetcode 50 ) => ( Recursive Approach )
+    public static double myPow(double x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;
+        if (n < 0) {
+            x = 1 / x;
+            n = -n;
+        }
+        double half = myPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+
+    // Reverse the Stack ( GFG ) => ( Recursive Approach )
+    public static void reverseStack(Stack<Integer> stack) {
+        if (stack.isEmpty()) return;
+        int top = stack.pop();
+        reverseStack(stack);
+        insertAtBottom(stack, top);
+    }
+
+    public static void insertAtBottom(Stack<Integer> stack, int value) {
+        if (stack.isEmpty()) {
+            stack.push(value);
+            return;
+        }
+        int top = stack.pop();
+        insertAtBottom(stack, value);
+        stack.push(top);
+    }
+
+    // Reverse the Stack ( GFG ) => ( Recursive Approach with extra Stack )
+    public static void reverseStackWithExtraStack(Stack<Integer> stack) {
+        if (stack.isEmpty()) return;
+
+        int top = stack.pop();
+        reverseStackWithExtraStack(stack);
+
+        Stack<Integer> tempStack = new Stack<>();
+        while (!stack.isEmpty()) {
+            tempStack.push(stack.pop());
+        }
+
+        stack.push(top);
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = {5, 4, 1, 3, 2};
         // bubbleSort(arr);
@@ -896,6 +975,21 @@ public class Revision4 {
         // System.out.println(isSorted(arr, 0));
         // towerOfHanoi(3, 'A', 'C', 'B');
 
+        // int arr[] = {1, 5, 3, 9, 2};
+        // System.out.println(largestElement(arr, 0));
+        // System.out.println(largestElementTailRecursive(arr, 0, Integer.MIN_VALUE));
+        // int arr[] = {1, 2, 3, 4, 2, 5};
+        // System.out.println(Arrays.toString(firstAndLastOccurrence(arr, 0, 2, -1, -1)));
+        // System.out.println(myPow(2.0, 10));
+        // Stack<Integer> stack = new Stack<>();
+        // stack.push(1);
+        // stack.push(2);  
+        // stack.push(3);
+        // // reverseStack(stack);
+        // reverseStackWithExtraStack(stack);
+        // System.out.println(stack);
+        
+        
 
 
     }

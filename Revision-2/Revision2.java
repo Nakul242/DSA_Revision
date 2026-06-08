@@ -922,6 +922,97 @@ public class Revision2 {
         return count;
     }
 
+    // permutations of a string ( leetCode 46 ) => ( Using Recursion and Fixing The Elements Approach )
+    public static List<List<Integer>> permute(int arr[]) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        boolean used[] = new boolean[arr.length];
+
+        permuteHelper(arr, used, list, ans);
+        return ans;
+    }
+
+    public static void permuteHelper(int arr[], boolean used[], List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == arr.length) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!used[i]) {
+
+                used[i] = true;
+                list.add(arr[i]);
+
+                permuteHelper(arr, used, list, ans);
+
+                list.remove(list.size() - 1);
+                used[i] = false;
+            }
+        }
+    }
+
+    // All String Permutations in Sorted Order ( GFG ) => ( Using Recursion and Fixing The Elements Approach )
+    public static ArrayList<String> stringPermute(String str) {
+        ArrayList<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        boolean used[] = new boolean[str.length()];
+
+        stringPermuteHelper(str, sb, used, result);
+        Collections.sort(result);
+        return result;
+    }
+    public static void stringPermuteHelper(String str, StringBuilder sb, boolean used[], ArrayList<String> result) {
+        if (str.length() == sb.length()) {
+            result.add(sb.toString());
+            return;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            if (!used[i]) {
+                used[i] = true;
+                sb.append(str.charAt(i));
+
+                stringPermuteHelper(str, sb, used, result);
+
+                sb.deleteCharAt(sb.length() - 1);
+                used[i] = false;
+            }
+        }
+    }
+
+    // Permutation II ( LeetCode 47 ) => ( Using Recursion and Fixing The Elements Approach )
+    public static List<List<Integer>> permuteUnique(int arr[]) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        boolean used[] = new boolean[arr.length];
+        Arrays.sort(arr); // to handle duplicates in input
+
+        permuteUniqueHelper(arr, used, list, ans);
+        return ans;
+    }
+
+    public static void permuteUniqueHelper(int arr[], boolean used[], List<Integer> list, List<List<Integer>> ans) {
+        if (list.size() == arr.length) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (used[i] || (i > 0 && arr[i] == arr[i-1] && !used[i-1])) {
+                continue; // skip duplicates
+            }
+
+            used[i] = true;
+            list.add(arr[i]);
+
+            permuteUniqueHelper(arr, used, list, ans);
+
+            list.remove(list.size() - 1);
+            used[i] = false;
+        }
+    }
+
     public static void main(String[] args) {
         // int arr[] = { 2, 5, 4, 7, 6};
         // bubbleSort(arr);
@@ -1009,6 +1100,11 @@ public class Revision2 {
         // // combination3(arr, 2, 0, new ArrayList<>(), ans);
         // System.out.println(ans);
 
-        System.out.println(letterTilePossibilities("AAB"));
+        // System.out.println(letterTilePossibilities("AAB"));
+        // System.out.println(permute(new int[]{1,2,3}));
+        // System.out.println(stringPermute("ABC"));
+        // System.out.println(permuteUnique(new int[]{1,1,2}));
+
+
     }
 }  
